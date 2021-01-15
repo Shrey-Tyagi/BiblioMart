@@ -57,7 +57,7 @@ import { mapActions } from "vuex";
 export default {
   name: "MerchantRegistration",
   methods: {
-    ...mapActions("account", ["login"]),
+    ...mapActions("account", {}),
   },
 };
 </script>

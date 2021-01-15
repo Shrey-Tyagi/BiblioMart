@@ -5,22 +5,17 @@
         <div class="image-holder">
             <img src="../../assets/BookImage.jpg" alt="">
         </div>
-        <form action="">
+        <form @submit.prevent="register">
             <h3>Registration Form</h3>
             <div class="form-group">
-                <input type="text" placeholder="First Name" class="form-control">
-                <input type="text" placeholder="Last Name" class="form-control">
+                <input type="text" placeholder="Name" v-model="name" class="form-control" required>
             </div>
             <div class="form-wrapper">
-                <input type="text" placeholder="Username" class="form-control">
-                <i class="zmdi zmdi-account"></i>
-            </div>
-            <div class="form-wrapper">
-                <input type="text" placeholder="Email Address" class="form-control">
+                <input type="email" placeholder="Email Address" v-model="email" class="form-control" required>
                 <i class="zmdi zmdi-email"></i>
             </div>
             <div class="form-wrapper">
-                <select name="" id="" class="form-control">
+                <select name="gender" id="gender" class="form-control" v-model="gender" required>
                     <option value="" disabled selected>Gender</option>
                     <option value="male">Male</option>
                     <option value="femal">Female</option>
@@ -29,16 +24,22 @@
                 <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
             </div>
             <div class="form-wrapper">
-                <input type="password" placeholder="Password" class="form-control">
+                <input type="text" placeholder="Address" v-model="address" class="form-control" required>
                 <i class="zmdi zmdi-lock"></i>
             </div>
             <div class="form-wrapper">
-                <input type="password" placeholder="Confirm Password" class="form-control">
+                <input type="password" placeholder="Password" v-model="password" class="form-control" required>
                 <i class="zmdi zmdi-lock"></i>
             </div>
+            <div class="form-wrapper">
+                <input type="password" placeholder="Confirm Password" v-model="rePassword" class="form-control" required>
+                <i class="zmdi zmdi-lock"></i>
+            </div>
+            
             <button>Register
                 <i class="zmdi zmdi-arrow-right"></i>
             </button>
+           
         </form>
     </div>
     </div>
@@ -46,7 +47,35 @@
 
 <script>
 export default {
-    name: "Register"
+    name: "Register",
+    data(){
+        return{
+            name : "",
+            email : "",
+            gender : "",
+            password : "",
+            rePassword : "",
+            address : ""
+        }
+    },
+    methods:{
+        register(){
+            if(this.password != this.rePassword){
+                alert("Enter the same Password in both the fields");
+            } 
+            else{
+            const axios = require('axios')
+            const data1 = {"email":"kannurudines@gmail.com","password":"12345"}
+            axios.post('http://6066aa2cf70b.ngrok.io/merchant/login', data1)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+    }
+    }
 }
 </script>
 
