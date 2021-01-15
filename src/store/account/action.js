@@ -1,4 +1,3 @@
-// /src/store/account/actions.js
 import router from '../../router'
 import Axios from 'axios';
 export function login({ commit }) {

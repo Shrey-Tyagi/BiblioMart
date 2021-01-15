@@ -1,4 +1,3 @@
-// /src/views/account/Login.vue
 <template>
   <div>
     <div class="container" style="padding-top: 10%">
