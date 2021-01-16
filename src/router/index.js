@@ -40,6 +40,10 @@ const routes = [
   {
     path: '/AddProduct',
     component:() => import('../views/account/AddProduct.vue')
+  },
+  {
+    path: '/updateProduct',
+    component:() => import('../views/account/MerchantUpdateProduct.vue')
   }
 ]
 

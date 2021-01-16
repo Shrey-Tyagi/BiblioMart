@@ -1,22 +1,22 @@
 <template>
 <div>
     <h2> Products of Login </h2>
-    <div v-for="product in product_list" :key="product.Name+product.Count" class="container-productList" >
+    <div v-for="product in product_list" :key="product" class="container-productList" >
         <div class="card-product">
             <div class="form-card">
-                <p><b>Product Name :</b> {{ product.Name }}</p>
+                <p><b>Product Name :</b> {{ product.productName }}</p>
             </div>
             <div class="form-card">
-                <p><b>Inventory :</b> {{ product.Count }} </p>
+                <p><b>Inventory :</b> {{ product.quantity }} </p>
             </div>
             <div class="form-card">
-                <p><b>Cost :</b> {{ product.Cost }} </p>
-            </div>
-            <div class="form-card">
-            <button class="form-submit-user"> Update</button>
+                <p><b>Cost :</b> {{ product.cost }} </p>
             </div>
         </div> 
     </div>
+    <router-link to='/updateProduct'>
+    <button class="form-submit-user update"> Update Product </button>
+    </router-link>
     <router-link to='/AddProduct'>
     <button class="form-submit-user"> Add Product</button>
     </router-link>
@@ -30,14 +30,14 @@ export default {
         return{
             product_list:[
                 {
-                    Name: "Car",
-                    Count: "10",
-                    Cost: "1000"
+                    productName : "Car",
+                    quantity : "10",
+                    cost : "1000"
                 },
                 {
-                    Name: "Cajshbxr",
-                    Count: "10",
-                    Cost: "1000"
+                    productName : "Cajshbxr",
+                    quantity : "10",
+                    cost : "1000"
                 },
             ]
         }
@@ -54,6 +54,10 @@ export default {
     font-weight: 400;
     font-family: Monospace;
 
+}
+
+.update{
+    margin-right: 50px;
 }
 
 h2{
