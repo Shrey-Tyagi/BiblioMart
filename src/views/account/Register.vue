@@ -64,15 +64,15 @@ export default {
                 alert("Enter the same Password in both the fields");
             } 
             else{
-            const axios = require('axios')
-            const data1 = {"email":"kannurudines@gmail.com","password":"12345"}
-            axios.post('http://6066aa2cf70b.ngrok.io/merchant/login', data1)
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            // const axios = require('axios')
+            // const data1 = {"email":"kannurudines@gmail.com","password":"12345"}
+            // axios.post('http://6066aa2cf70b.ngrok.io/merchant/login', data1)
+            // .then(function (response) {
+            //     console.log(response);
+            // })
+            // .catch(function (error) {
+            //     console.log(error);
+            // });
         }
     }
     }

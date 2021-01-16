@@ -10,7 +10,7 @@
             <img
               :src="user.photoURL"
               class="img-thumbnail profile-image"
-              alt
+              alt = "User Img"
             />
             </router-link>
             <router-link class="btn btn-primary my-2 my-sm-0" to="/cart">
@@ -22,10 +22,8 @@
               <span class="badge badge-danger badge-pill">{{ cart.length }}</span>
             </router-link>
           </div>
-          <div v-else>
           <router-link class="btn btn-primary my-2 my-sm-0" to="/register">Register</router-link>
           <router-link class="btn btn-primary my-2 my-sm-0" to="/login">Login</router-link>
-          </div>
         </div>
       </nav>
     </div>

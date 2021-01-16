@@ -24,6 +24,22 @@ const routes = [
   {
     path: '/merchantRegister',
     component:() => import('../views/account/MerchantRegister.vue')
+  },
+  {
+    path: '/user',
+    component:() => import('../views/account/user.vue')
+  },
+  {
+    path: '/userhistory',
+    component:() => import('../views/account/userhistory.vue')
+  },
+  {
+    path: '/MerchantProduct',
+    component:() => import('../views/account/MerchantProduct.vue')
+  },
+  {
+    path: '/AddProduct',
+    component:() => import('../views/account/AddProduct.vue')
   }
 ]
 

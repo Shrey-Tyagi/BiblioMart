@@ -1,0 +1,154 @@
+<template>
+  <div>
+    <div class="container" style="padding-top: 10%">
+      <div class="row d-flex justify-content-center">
+        <div class="col-5 text-left login-form-container">
+          <div class="d-flex justify-content-center">
+            <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" width="150" alt="">
+          </div>
+          <div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" />
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button @click="login()" type="submit" class="btn btn-primary btn-block">Login</button>
+            <div v-if="personalID == ''" class="btn btn-primary btn-block">
+                <!-- <facebook-login class="button"
+                  appId="1128872574234958"
+                  @login="onLogin"
+                  @logout="onLogout"
+                  @get-initial-status="getUserData"
+                  @sdk-loaded="sdkLoaded">
+                </facebook-login> -->
+              </div>
+              <!-- <div>
+                <div class="signup-buttons btn btn-primary btn-block">
+                  <a href="#" class="google-signup" @click.prevent="loginWithGoogle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><title>Google</title><g fill="none" fill-rule="evenodd"><path fill="#4285F4" d="M17.64 9.2045c0-.6381-.0573-1.2518-.1636-1.8409H9v3.4814h4.8436c-.2086 1.125-.8427 2.0782-1.7959 2.7164v2.2581h2.9087c1.7018-1.5668 2.6836-3.874 2.6836-6.615z"></path><path fill="#34A853" d="M9 18c2.43 0 4.4673-.806 5.9564-2.1805l-2.9087-2.2581c-.8059.54-1.8368.859-3.0477.859-2.344 0-4.3282-1.5831-5.036-3.7104H.9574v2.3318C2.4382 15.9832 5.4818 18 9 18z"></path><path fill="#FBBC05" d="M3.964 10.71c-.18-.54-.2822-1.1168-.2822-1.71s.1023-1.17.2823-1.71V4.9582H.9573A8.9965 8.9965 0 0 0 0 9c0 1.4523.3477 2.8268.9573 4.0418L3.964 10.71z"></path><path fill="#EA4335" d="M9 3.5795c1.3214 0 2.5077.4541 3.4405 1.346l2.5813-2.5814C13.4632.8918 11.426 0 9 0 5.4818 0 2.4382 2.0168.9573 4.9582L3.964 7.29C4.6718 5.1627 6.6559 3.5795 9 3.5795z"></path></g></svg>
+                    Google
+                  </a>
+                </div>
+              </div> -->
+              <div>
+              <router-link>
+                  <button class="tn btn-primary btn-block" to="/MerchantProduct">MerchantProduct</button>
+              </router-link>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+
+<script>
+// import { mapActions } from "vuex";
+// import facebookLogin from 'facebook-login-vuejs';
+export default {
+  data() {
+        return {
+          isConnected: false,
+          name: '',
+          email: '',
+          personalID: '',
+          picture: '',
+          FB: undefined
+        }
+      },
+  name: "Login",
+  // methods: {
+  //   loginWithGoogle () {
+  //     this.$gAuth
+  //       .signIn()
+  //       .then(GoogleUser => {
+  //         // on success do something
+  //         console.log('GoogleUser', GoogleUser)
+  //         var userInfo = {
+  //           loginType: 'google',
+  //           google: GoogleUser
+  //         }
+  //         this.$store.commit("setUserData", userInfo)
+  //         this.$router.push('/')
+  //       })
+  //       .catch(error => {
+  //         console.log('error', error)
+  //       })
+  //   },
+  //   ///////
+
+  //     //   ...mapActions("account", ["login"]),
+  //     //     getUserData() {
+  //     //   this.FB.api('/me', 'GET', { fields: 'id,name,email,picture' },
+  //     //     user => {
+  //     //       this.personalID = user.id;
+  //     //       this.email = user.email;
+  //     //       this.name = user.name;
+  //     //       this.picture = user.picture.data.url;
+  //     //       console.log(this.personalID);
+  //     //       console.log(this.email);
+  //     //       console.log(this.name);
+  //     //       // this.onLogout();
+  //     //       this.$router.push('/');
+  //     //       //TODO send apis to backend and change the route
+  //     //     }
+  //     //   )
+  //     // },
+  //     // sdkLoaded(payload) {
+  //     //   this.isConnected = payload.isConnected
+  //     //   this.FB = payload.FB
+  //     //   if (this.isConnected) this.getUserData()
+  //     // },
+  //     // onLogin() {
+  //     //   this.isConnected = true
+  //     //   this.getUserData()
+  //     // },
+  //     // onLogout() {
+  //     //   this.isConnected = false;
+  //     // }
+    ///////
+      // },
+      // components: {
+      //   facebookLogin
+      // }
+      
+};
+</script>
+
+<style>
+.form-control {
+  border-radius: 0%;
+  height: 50px;
+}
+.login-form-container {
+  padding: 20px;
+  box-shadow: 0px 2px 5px 2px #888888;
+}
+.btn {
+  border-radius: 0%;
+  font-weight: bold;
+  background: teal;
+  border: teal;
+}
+.btn:hover {
+  background: #00b4b4;
+}
+.btn:focus {
+  background: teal;
+}
+</style>

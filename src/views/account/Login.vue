@@ -25,6 +25,10 @@
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             <button @click="login()" type="submit" class="btn btn-primary btn-block">Login</button>
+            <router-link to="/MerchantProduct">
+            <button class="btn btn-primary btn-block">Merchant product list!</button> 
+            <!-- shift to a different merchant page -->
+            </router-link>
           </div>
         </div>
       </div>

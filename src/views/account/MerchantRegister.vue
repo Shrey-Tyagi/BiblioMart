@@ -1,6 +1,6 @@
 //Todo
 <template>
-    <div class="main">
+    <div class="body-main">
         <section class="register">
             <div class="container">
                 <div class="signup-container">
@@ -62,16 +62,13 @@ export default {
 };
 </script>
 
-<style scoped>
-*{
-    box-sizing: border-box;
-}
 
-body {
+<style scoped>
+.body-main{
+    box-sizing: border-box;
     font-size: 13px;
     line-height: 1.8;
     color: #222;
-    background: #f8f8f8;
     font-weight: 400;
     font-family: Monospace;
 }
@@ -82,7 +79,7 @@ section{
 }
 
 .container{
-    background: #fff;
+    background: #f8f8f8;
     margin: 0 auto;
     border-radius: 20px;
     width: 70%;
