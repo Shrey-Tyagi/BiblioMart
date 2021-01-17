@@ -1,7 +1,7 @@
 <template>
 <div>
     <h2> Products of Login </h2>
-    <div v-for="product in product_list" :key="product" class="container-productList" >
+    <div v-for="product in getData" :key="product.productName" class="container-productList" >
         <div class="card-product">
             <div class="form-card">
                 <p><b>Product Name :</b> {{ product.productName }}</p>
@@ -24,24 +24,31 @@
 </template>
  
 <script>
+//import axios from 'axios'
 export default {
     name:"MerchantProduct",
     data(){
         return{
-            product_list:[
-                {
-                    productName : "Car",
-                    quantity : "10",
-                    cost : "1000"
-                },
-                {
-                    productName : "Cajshbxr",
-                    quantity : "10",
-                    cost : "1000"
-                },
-            ]
+
+        }
+    },
+/*    method:{
+        getData(){
+            axios.get('http://localhost:8083/merchant/view/',1)
+            .then(function (response) {
+                console.log(response);
+            }
+
+            
+            ); return undefined;
+        }
+    }*/
+    computed:{
+        getData(){
+            return this.$store.state.productList;
         }
     }
+
 }
 </script>
 

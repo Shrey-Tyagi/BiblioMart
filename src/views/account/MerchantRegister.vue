@@ -6,12 +6,12 @@
                 <div class="signup-container">
                     <div class="flex-container">
                         <h2>Sign up as Merchant</h2>
-                        <form action="">
+                        <form @submit.prevent="onSubmit">
                             <div>
                                 <label for="name">
                                     <i class="fa fa-user"></i>
                                 </label>
-                                <input type="text" name="name" id="name" placeholder="Your Name">
+                                <input type="text" v-model="name" id="name" placeholder="Your Name" required>
                             </div>
                             <!-- <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
@@ -25,21 +25,21 @@
                                 <label for="email">
                                     <i class="fa fa-envelope"></i>
                                 </label>
-                                <input type="text" name="email" id="email" placeholder="Your Email">
+                                <input type="text" name="email" id="email" placeholder="Your Email" v-model="email" required>
                             </div>
                             <div>
                                 <label for="password">
                                     <i class="fa fa-key"></i>
                                 </label>
-                                <input type="password" name="password" id="password" placeholder="password">
+                                <input type="password" name="password" id="password" placeholder="password" v-model="password" required>
                             </div>
                             <div>
                                 <label for="rePassword">
                                     <i class="fa fa-lock"></i>
                                 </label>
-                                <input type="password" name="rePassword" id="rePassword" placeholder="Repeat your password">
+                                <input type="password" name="rePassword" id="rePassword" placeholder="Repeat your password" v-model="rePassword" required>
                             </div>
-                            <button class="form-submit">Register</button>
+                            <button class="btn btn-primary">Register</button> 
                         </form>
                     </div>
                     <div class="flex-container imgcontainer">
@@ -54,12 +54,56 @@
 
 <script>
 import { mapActions } from "vuex";
+import axios from 'axios';
+// import router from 'router';
 export default {
+    data(){
+        return{
+            name:"",
+            email:"",
+            password:"",
+            rePassword:"",
+        }
+    },
   name: "MerchantRegistration",
   methods: {
     ...mapActions("account", {}),
-  },
-};
+    onSubmit(){
+      if(this.password == this.rePassword){
+          let data = {
+              'merchantName':this.name,
+              'password':this.password,
+              "email":this.email
+          }
+          axios.post('http://localhost:8083/merchant/register', data)
+            .then( (response) => {
+                console.log(response);
+                this.saveInStore(response);
+            })
+
+            .catch(function (error) {
+                console.log(error);
+            });
+
+            
+            
+            
+             this.$router.push({name:'MerchantProduct'})
+
+            
+         }
+      else{
+          alert("Enter the same password in both the fields");
+      }
+    },
+        saveInStore(response){
+        console.log(response);
+        this.$store.state.Id = response.data.merchantId;
+    
+        return response.data.merchantId;
+    },
+}
+}
 </script>
 
 

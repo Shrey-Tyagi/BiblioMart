@@ -35,6 +35,7 @@ const routes = [
   },
   {
     path: '/MerchantProduct',
+    name: "MerchantProduct",
     component:() => import('../views/account/MerchantProduct.vue')
   },
   {

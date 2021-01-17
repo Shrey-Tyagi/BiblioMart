@@ -7,6 +7,7 @@
             <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" width="150" alt="">
           </div>
           <div>
+            <form @submit.prevent="getData">
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
               <input
@@ -14,21 +15,23 @@
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
+                v-model="email"
               />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" />
+              <input type="password" class="form-control" v-model="password" id="exampleInputPassword1" />
             </div>
             <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1" />
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-            <button @click="login()" type="submit" class="btn btn-primary btn-block">Login</button>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
             <router-link to="/MerchantProduct">
             <button class="btn btn-primary btn-block">Merchant product list!</button> 
             <!-- shift to a different merchant page -->
             </router-link>
+            </form>
           </div>
         </div>
       </div>
@@ -36,11 +39,32 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+
+import axios from 'axios';
+
 export default {
   name: "Login",
+  data(){
+    return {
+        email: '',
+        password: ''
+    }
+  },
   methods: {
-    ...mapActions("account", ["login"]),
+  getData(){
+            let get = {"email":this.email,"password":this.password}
+            axios.post('http://localhost:8083/merchant/login/',get)
+            .then((response)=>{
+                console.log(response);
+                this.saveInUser(response);
+            });
+            this.$router.push({name:'MerchantProduct'}); 
+        },
+  saveInUser(response){
+  this.$store.state.productList= response.data.productDetails;
+  this.$store.state.Id = response.data.merchantId;
+  return response.data;
+  }
   },
 };
 </script>
