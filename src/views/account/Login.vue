@@ -7,7 +7,7 @@
             <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" width="150" alt="">
           </div>
           <div>
-            <form @submit.prevent="getData">
+            <form @submit.prevent="getData" @submituser.prevent="getUser">
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
               <input
@@ -27,6 +27,7 @@
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
+            <button type="submituser" class="btn btn-primary btn-block">Login user</button>
             <router-link to="/MerchantProduct">
             <button class="btn btn-primary btn-block">Merchant product list!</button> 
             <!-- shift to a different merchant page -->

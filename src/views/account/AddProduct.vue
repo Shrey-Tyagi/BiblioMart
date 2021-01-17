@@ -54,6 +54,7 @@
 
 
 <script>
+import axios from 'axios'
 export default {
     name:  "AddProduct",
 // https://jayway.github.io/vue-js-workshop/docs/add-products.html   and add attributes 
@@ -74,7 +75,7 @@ export default {
     },
       methods: {
         onSubmit () {
-            this.productDetails = {
+            this.productDetails = [{
                 "categoryName":this.category,
                 "productName":this.productName,
                 "cost":parseInt(this.price),
@@ -83,12 +84,42 @@ export default {
                 "language":this.language,
                 "publisher":this.publisher,
                 "author":this.author,
-                "edition":this.edition
-                };
+                "edition":this.edition,
+                "imageUrl":"https://www.w3schools.com/css/img_5terre.jpg"
+                }];
                 console.log(this.productDetails);
                 // TODO Get Merchant Id from store send this object {"merchantId": temp , productDetails}
+                let data = {
+                              "merchantId": this.$store.state.Id,
+                              "productDetails": [{
+                              "categoryName":this.category,
+                              "productName":this.productName,
+                              "cost":parseInt(this.price),
+                              "quantity":parseInt(this.quantity),
+                              "productDescription":this.productDescription,
+                              "language":this.language,
+                              "publisher":this.publisher,
+                              "author":this.author,
+                              "edition":this.edition,
+                              "imageUrl":"https://www.w3schools.com/css/img_5terre.jpg"
+                              }]
+                            }
+                              
+                axios.post('http://localhost:8083/merchant/addProduct',data)
+                .then( (response) => {
+                    console.log(response);
+                    this.$store.state.productList = response.data.productDetails;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                
+                this.$router.push({name:'MerchantProduct'})
+    },
+
+
     //   this.$emit('submit', this.product)
-        }
+        
     }
 }
 </script>
