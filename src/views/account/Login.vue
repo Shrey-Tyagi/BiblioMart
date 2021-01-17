@@ -7,7 +7,6 @@
             <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" width="150" alt="">
           </div>
           <div>
-            <form @submit.prevent="getData" @submituser.prevent="getUser">
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
               <input
@@ -26,12 +25,15 @@
               <input type="checkbox" class="form-check-input" id="exampleCheck1" />
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
+            <form @submit.prevent="getData">
+            <button type="submit" class="btn btn-primary btn-block">Login Merchant</button>
+            </form>
+            <form @submit.prevent="getUser">
             <button type="submituser" class="btn btn-primary btn-block">Login user</button>
-            <router-link to="/MerchantProduct">
+            <!--<router-link to="/MerchantProduct">
             <button class="btn btn-primary btn-block">Merchant product list!</button> 
-            <!-- shift to a different merchant page -->
-            </router-link>
+            shift to a different merchant page
+            </router-link>-->
             </form>
           </div>
         </div>
@@ -54,6 +56,7 @@ export default {
   methods: {
   getData(){
             let get = {"email":this.email,"password":this.password}
+            console.log(get)
             axios.post('http://localhost:8083/merchant/login/',get)
             .then((response)=>{
                 console.log(response);
@@ -65,7 +68,15 @@ export default {
   this.$store.state.productList= response.data.productDetails;
   this.$store.state.Id = response.data.merchantId;
   return response.data;
-  }
+  },//to getUSer is for user and get data for merchant 
+  getUser(){
+  let get = {"email":this.email,"password":this.password}
+  axios.post('http://localhost:8083/registration/login/',get)
+            .then((response)=>{
+                console.log(response);
+                this.saveInUser(response);
+            });
+      }
   },
 };
 </script>

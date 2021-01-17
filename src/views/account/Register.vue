@@ -24,6 +24,10 @@
                 <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
             </div>
             <div class="form-wrapper">
+                <input type="text" placeholder="Enter your Age" v-model="age" class="form-control" required>
+                <i class="zmdi zmdi-lock"></i>
+            </div>
+            <div class="form-wrapper">
                 <input type="text" placeholder="Address" v-model="address" class="form-control" required>
                 <i class="zmdi zmdi-lock"></i>
             </div>
@@ -46,16 +50,19 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: "Register",
     data(){
         return{
-            name : "",
-            email : "",
-            gender : "",
-            password : "",
-            rePassword : "",
-            address : ""
+            email: "",
+            password: "",
+            rePassword:"",
+            image: "https://www.w3schools.com/css/img_5terre.jpg",
+            name: "",
+            gender: "",
+            age: "",
+            address: ""
         }
     },
     methods:{
@@ -63,20 +70,48 @@ export default {
             if(this.password != this.rePassword){
                 alert("Enter the same Password in both the fields");
             } 
-            else{
-            // const axios = require('axios')
-            // const data1 = {"email":"kannurudines@gmail.com","password":"12345"}
-            // axios.post('http://6066aa2cf70b.ngrok.io/merchant/login', data1)
-            // .then(function (response) {
-            //     console.log(response);
-            // })
-            // .catch(function (error) {
-            //     console.log(error);
-            // });
+            else{this.getData()}
+        },
+        getData(){
+            let get = {
+              "email":this.email,
+              "password":this.password,
+              "image":this.image,
+              "name":this.name,
+              "gender":this.gender,
+              "age":this.age,
+              "address":this.address,
+              "fb": 0,
+              "gmail": 0,
+              "timestamps": null,
+              "accessTokenFb": 0,
+              "accessTokenGmail": 0
+              }
+            axios.post('http://localhost:8082/registration', get)
+            .then((response)=>{
+                console.log(response);
+                this.saveInUser(response);
+            });
+            this.$router.push({name:'/'})
+            // this.$router.push({name:'MerchantProduct'}); 
+        },
+  saveInUser(response){
+  this.$store.state.userDetails= response.data;
+  this.$store.state.Id = response.data.userId;
+  return response.data;
+  },
+  // getUser(){
+  // let get = {"email":this.email,"password":this.password}
+  // axios.post('http://localhost:8082/merchant/login/',get)
+  //           .then((response)=>{
+  //               console.log(response);
+  //               this.saveInUser(response);
+  //           });
+  // }
+  // },
         }
     }
-    }
-}
+
 </script>
 
 

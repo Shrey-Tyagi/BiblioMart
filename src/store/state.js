@@ -7,7 +7,7 @@ export const store =  new Vuex.Store({
     state : {
       Id: -1,
       // merDetails:[],
-      productList:[]
-      
+      productList:[],
+      userDetails:{}
     }
   })
