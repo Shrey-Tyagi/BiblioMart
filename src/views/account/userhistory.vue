@@ -1,34 +1,81 @@
 <template>
 <div>
     <h2> History of Login </h2>
-    <div v-for="history in login_history" :key="history.TIme+history.Date" class="container-userhistory" >
+    <form @submit.prevent="dateHistory">
+        <input type="date" v-model="date">
+    </form>
+
+    <div v-for="history in login_history" :key="history.date+history.time" class="container-userhistory" >
         <div class="card-history">
             <div class="form-card">
-                <p><b>Date :</b> {{ history.Date }}</p>
+                <p><b>Date :</b> {{ history.date }}</p>
             </div>
             <div class="form-card">
-                <p><b>Time :</b> {{ history.Time }} </p>
+                <p><b>Time :</b> {{ history.time }} </p>
             </div>
         </div>  
     </div>
 </div>
 </template>
- 
+
+
 <script>
+import axios from 'axios'
 export default {
     name:"userhistory",
-    data(){
-        return{
-            login_history:[
-                {
-                    Date:"22/12/2020",
-                    Time:"12:32:22"
-                },
-                {
-                    Date:"12/01/2020",
-                    Time:"1:22:42"
-                },
-            ]
+    data() {
+        return {
+            date : "",
+            data1 : "1",
+            timeStampData:[],
+        };
+    },
+    methods:{
+        dateHistory(){
+            console.log(this.date);
+        },
+        getLoginDetails() {
+            let httpAddress1 = 'http://localhost:8082/registration/loginHistory/'+this.date.toString()+'/'+this.$store.state.Id
+            console.log(httpAddress1);
+              axios.get(httpAddress1)
+            .then((response)=>{
+                this.timeStampData = [];
+                for(let i=0;i<response.data.length;i++){
+                    let timeDate = response.data[i].split(" ");
+                    let data1 = {};
+                    data1["date"] = timeDate[0]+" "+timeDate[1]+" "+timeDate[2];
+                    data1["time"] = timeDate[3];
+                    this.timeStampData.push(data1);               
+                }
+            })
+            this.data1 = this.date;
+            return this.timeStampData;
+          }
+    },
+    watch:{
+
+    },
+    computed:{
+        login_history(){
+            if(this.date == ''){
+                let times = this.$store.state.userDetails.timestamps;
+                times = times.split(",");
+                let timeStampData = [];
+                for(let i=0;i<times.length;i++){
+                    let timeDate = times[i].split(" ");
+                    let data = {};
+                    data["date"] = timeDate[0];
+                    data["time"] = timeDate[1].substring(0,8);
+                timeStampData.push(data);
+                }
+                return timeStampData;
+            }
+        else if(this.data1 != this.date){
+            let timeStamp = this.getLoginDetails();
+            console.log(timeStamp);
+            return timeStamp;
+            }
+            return this.timeStampData;
         }
     }
 }

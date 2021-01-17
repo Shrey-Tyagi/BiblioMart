@@ -60,22 +60,29 @@ export default {
             axios.post('http://localhost:8083/merchant/login/',get)
             .then((response)=>{
                 console.log(response);
-                this.saveInUser(response);
+                this.saveInMer(response);
             });
             this.$router.push({name:'MerchantProduct'}); 
         },
-  saveInUser(response){
+  saveInMer(response){
   this.$store.state.productList= response.data.productDetails;
   this.$store.state.Id = response.data.merchantId;
   return response.data;
   },//to getUSer is for user and get data for merchant 
+  saveInUser(response){
+  this.$store.state.Id= response.data.userId;
+  this.$store.state.userName= response.data.name;
+  },
   getUser(){
   let get = {"email":this.email,"password":this.password}
-  axios.post('http://localhost:8083/registration/login/',get)
+  console.log(get);
+  axios.post('http://localhost:8082/registration/login/',get)
             .then((response)=>{
                 console.log(response);
                 this.saveInUser(response);
+                console.log(this.$store.state.Id);
             });
+            this.$router.push({name:'product'});
       }
   },
 };

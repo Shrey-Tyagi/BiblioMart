@@ -1,38 +1,27 @@
-//TODO
 <template>
     <div class="wrapper" style='background-image: url("../../assets/BookImage.jpg");'>		
     <div class="inner">
         <div class="image-holder">
-            <img src="../../assets/BookImage.jpg" alt="">
+            <img src="../../assets/BookImage.jpg" alt="BookImg">
         </div>
-        <form @submit.prevent="register">
-            <h3>Registration Form</h3>
+        <form @submit.prevent="update">
+            <h3>Updation Form</h3>
             <div class="form-group">
-                <input type="text" placeholder="Name" v-model="name" class="form-control" required>
+                <input type="text" placeholder="Name" v-model="name" class="form-control">
             </div>
             <div class="form-wrapper">
-                <input type="email" placeholder="Email Address" v-model="email" class="form-control" required>
-                <i class="zmdi zmdi-email"></i>
+                Email:- {{this.$store.state.userDetails.email}}
             </div>
             <div class="form-wrapper">
-                <select name="gender" id="gender" class="form-control" v-model="gender" required>
-                    <option value="" disabled selected>Gender</option>
-                    <option value="male">Male</option>
-                    <option value="femal">Female</option>
-                    <option value="other">Other</option>
-                </select>
-                <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
-            </div>
-            <div class="form-wrapper">
-                <input type="text" placeholder="Enter your Age" v-model="age" class="form-control" required>
+                <input type="text" placeholder="Enter your Age" v-model="age" class="form-control">
                 <i class="zmdi zmdi-lock"></i>
             </div>
             <div class="form-wrapper">
-                <input type="text" placeholder="Address" v-model="address" class="form-control" required>
+                <input type="text" placeholder="Address" v-model="address" class="form-control">
                 <i class="zmdi zmdi-lock"></i>
             </div>
             <div class="form-wrapper">
-                <input type="password" placeholder="Password" v-model="password" class="form-control" required>
+                <input type="password" placeholder="Password" v-model="password" class="form-control">
                 <i class="zmdi zmdi-lock"></i>
             </div>
             <div class="form-wrapper">
@@ -40,7 +29,7 @@
                 <i class="zmdi zmdi-lock"></i>
             </div>
             
-            <button>Register
+            <button>Update
                 <i class="zmdi zmdi-arrow-right"></i>
             </button>
            
@@ -55,25 +44,26 @@ export default {
     name: "Register",
     data(){
         return{
-            email: "",
+            email: this.$store.state.userDetails.email,
             password: "",
             rePassword:"",
             image: "https://www.w3schools.com/css/img_5terre.jpg",
-            name: "",
+            name: this.$store.state.userName,
             gender: "",
-            age: "",
-            address: ""
+            age: this.$store.state.userDetails.age,
+            address: this.$store.state.userDetails.address
         }
     },
     methods:{
-        register(){
+        update(){
             if(this.password != this.rePassword){
                 alert("Enter the same Password in both the fields");
             } 
-            else{this.getData()}
+            else{this.putData()}
         },
-        getData(){
+        putData(){
             let get = {
+              "userId":this.$store.state.Id, 
               "email":this.email,
               "password":this.password,
               "image":this.image,
@@ -87,12 +77,12 @@ export default {
               "accessTokenFb": 0,
               "accessTokenGmail": 0
               }
-            axios.post('http://localhost:8082/registration', get)
+            axios.put('http://localhost:8082/registration/updateProfile', get)
             .then((response)=>{
                 console.log(response);
                 this.saveInUser(response);
             });
-            this.$router.push({name:'product'})
+            this.$router.push({path:'/user'})
           
             // this.$router.push({name:'MerchantProduct'}); 
         },

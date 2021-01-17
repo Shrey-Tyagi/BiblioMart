@@ -2,16 +2,21 @@
 <template>
   <div>
     <div>
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <form @submit.prevent="getUser">
+       <button> {{ this.$store.state.userName }} </button>
+       </form>
+      <!--<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <router-link class="navbar-brand" to="/">BiblioMart</router-link>
         <div class="ml-auto">
           <div v-if="user.photoURL">
             <router-link to="/user">
             <img
+               
               :src="user.photoURL"
               class="img-thumbnail profile-image"
               alt = "User Img"
             />
+            <button @click="getUser"> {{ this.$store.state.userName }} </button>
             </router-link>
             <router-link class="btn btn-primary my-2 my-sm-0" to="/cart">
               <img
@@ -25,7 +30,7 @@
           <router-link class="btn btn-primary my-2 my-sm-0" to="/register">Register</router-link>
           <router-link class="btn btn-primary my-2 my-sm-0" to="/login">Login</router-link>
         </div>
-      </nav>
+      </nav>-->
     </div>
     <div class="page-container">
       <router-view />
@@ -96,12 +101,29 @@
 
 
 <script>
-import { mapGetters } from "vuex";
+import axios from 'axios'
 export default {
   name: "Base",
   computed: {
-    ...mapGetters("account", ["user"]),
-    ...mapGetters("product", ["cart"])
+   
+  },
+  methods: {
+    getUser(){
+      let get = this.$store.state.Id
+            console.log(get)
+            let httpAddress = "http://localhost:8082/registration/profile/"+get;
+            console.log(httpAddress);
+            axios.get(httpAddress)
+            .then((response)=>{
+                console.log(response);
+                this.$store.state.userDetails= response.data;
+              this.$store.state.Id = response.data.userId;
+              //return response.data;
+                // this.saveInMer(response);
+            });
+            console.log("Hello");
+           this.$router.push({path:'/user'}); 
+    }
   }
 };
 </script>

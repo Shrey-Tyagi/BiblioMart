@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     component: () => import('../layouts/Base.vue'),
     children: [ 
-      { path: '', component: () => import('../views/home/Products.vue') },
+      { path: '', name: "product", component: () => import('../views/home/Products.vue') },
       { path: 'details/:idProduct', component: () => import('../views/home/Details.vue') },
       { path: 'cart', component: () => import('../views/home/Cart.vue') }
     ],
@@ -45,6 +45,10 @@ const routes = [
   {
     path: '/updateProduct',
     component:() => import('../views/account/MerchantUpdateProduct.vue')
+  },
+  {
+    path: '/updateuser',
+    component:() => import('../views/account/UpdateUser.vue')
   }
 ]
 

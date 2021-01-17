@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import axios from 'axios';
 // import router from 'router';
 export default {
@@ -67,7 +66,6 @@ export default {
     },
   name: "MerchantRegistration",
   methods: {
-    ...mapActions("account", {}),
     onSubmit(){
       if(this.password == this.rePassword){
           let data = {

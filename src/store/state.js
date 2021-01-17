@@ -8,6 +8,7 @@ export const store =  new Vuex.Store({
       Id: -1,
       // merDetails:[],
       productList:[],
-      userDetails:{}
+      userDetails:{},
+      userName: ""
     }
   })

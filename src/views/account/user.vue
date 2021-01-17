@@ -12,30 +12,31 @@
                         <table>
                             <tr>
                                 <td><b>Name : </b></td>
-                                <td> Kannuru Dinesh </td>
+                                <td> {{getData.name}} </td>
                             </tr>
                             <tr>
                                 <td><b>Email : </b></td>
-                                <td> dineshkannuru99@gmail.com </td>
+                                <td> {{getData.email}} </td>
                             </tr>
                             <tr>
                                 <td><b>Age : </b></td>
-                                <td> 20 </td>
+                                <td> {{getData.age}} </td>
                             </tr>
                             <tr>
                                 <td><b>Gender : </b></td>
-                                <td> Male </td>
+                                <td> {{getData.gender}} </td>
                             </tr>
                             <tr>
                                 <td><b>Address : </b></td>
-                                <td> Earth,Mars </td>
+                                <td> {{getData.address}} </td>
                             </tr>
                         </table>
                         <router-link to="/userhistory">
                         <button class="form-submit-user">Login History</button>
                         </router-link>
+                        <router-link to="/updateuser">
                         <button class="form-submit-user">Update Profile</button>
-                        
+                        </router-link>
                     </div>
                 </div>
         </section>
@@ -44,8 +45,15 @@
 </template>
     
 <script>
+
 export default {
-    name: 'user'//add store and dynamically update 
+    name: 'user',//add store and dynamically update 
+    computed: {
+        getData(){
+            return this.$store.state.userDetails;
+        },
+    }
+
 }
 </script>
 
