@@ -9,9 +9,12 @@ const routes = [
     component: () => import('../layouts/Base.vue'),
     children: [ 
       { path: '', name: "product", component: () => import('../views/home/Products.vue') },
-      { path: 'details/:idProduct', component: () => import('../views/home/Details.vue') },
-      { path: 'cart', component: () => import('../views/home/Cart.vue') }
+      { path: 'details/:idProduct', component: () => import('../views/home/Details.vue') }
     ],
+  },
+  {
+    path: '/cart',
+    component: () => import('../views/home/Cart.vue')
   },
   {
     path: '/login',

@@ -12,6 +12,7 @@ export const store =  new Vuex.Store({
       userName: "",
       mainProducts:[],
       singleProduct: {},
-      productId: 1
+      productId: 1,
+      userCart: []
     }
   })

@@ -40,8 +40,9 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: 'HelloWorld',
+  name: 'Details',
   data(){
     return{
       merchantDetails:"",
@@ -73,13 +74,22 @@ export default {
       else{
         let addToCartdata = {
           "userId": this.$store.state.Id,
-          "productId" :this.product.productName,
-          "productName" :this.product.productId,
+          "productId" :this.product.productId,
+          "productName" :this.product.productName,
           "quantity":this.quantity,
           "merchantId":this.merchantId,
           "cost":this.price
         }
         console.log(addToCartdata);
+        axios.post('http://localhost:8087/cart/cartadd',addToCartdata)
+                .then( (response) => {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                // this.$router.push({name:'MerchantProduct'})
+
       }
     }
   },

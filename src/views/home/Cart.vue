@@ -1,82 +1,153 @@
-// src/views/home/Cart.vue
 <template>
-  <div class="container" style="padding: 30px">
-    <div class="row d-flex justify-content-center">
-      <div class="list-group col-8">
-        <a
-          v-for="item in cart"
-          :key="item.id"
-          href="#"
-          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-        >
-          <img :src="item.imageUrl" alt height="60" width="60" />
-          <p class="h4">{{ item.name }}</p>
-          <div class="row">
-            <div class="mr-2">
-              <p>Unique Price</p>
-              <p>${{ item.price }}</p>
-            </div>
-            <div class="mr-2">
-              <p>Total Price</p>
-              <p>${{ item.price * item.quantity }}</p>
-            </div>
-            <div>
-              <p>Quantity</p>
-              <p>{{ item.quantity }}</p>
-            </div>
-          </div>
-        </a>
-        <div
-          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-        >
-          <p class="h4">Total</p>
-          <div>
-            <p>Total Price</p>
-            <p>${{ totalPrice }}</p>
-          </div>
+  <div>
+    <h2>CART</h2>
+    <div class="cart-card-page">
+      <div class="cart-card" v-for="cart in getCart" :key="cart.productId+''+cart.merchantId">
+        <div>
+          <h3>{{ cart.productName }}</h3>
         </div>
-        <button
-          @click="checkout()"
-          type="button"
-          class="btn btn-primary btn-lg btn-block mt-4"
-        >Checkout</button>
+        <div>
+          <h3>Quantity : {{ cart.quantity }}</h3>
+        </div>
+        <div>
+          <h3>Cost : {{ cart.cost }}</h3>
+        </div>
+        <div>
+          <button @click="viewItemInCart(cart.productId)" class="view-item"> VIEW ITEM </button>
+        </div>
+        <div>
+          <button @click="deleteItemFromCart(cart.productId,cart.merchantId)" class="delete-item"> DELETE ITEM </button>
+        </div>
       </div>
     </div>
+    <h3> Total Cost : {{ totalCost() }} </h3>
+    <button @click="checkout()" class="view-item"> CHECK OUT </button>
   </div>
 </template>
+
 <script>
-import { mapGetters, mapActions } from "vuex";
+import axios from 'axios'
 export default {
-  name: "Cart",
-  data() {
-    return {
-      totalPrice: 0,
-    };
+  name: 'HelloWorld',
+  computed:{
+    getCart(){
+      return this.$store.state.userCart;
+    }
   },
-  computed: {
-    ...mapGetters("product", ["cart"]),
-    ...mapGetters("account", ["user"]),
-  },
-  methods: {
-    ...mapActions("product", ["removeCart"]),
-    calcPrice() {
-      this.cart.forEach((element) => {
-        this.totalPrice += element.price * element.quantity;
-      });
+  methods:{
+  totalCost(){
+    let cost = 0;
+      for(let i =0;i<this.getCart.length;i++){
+        cost += parseInt(this.getCart[i].cost);
+      }
+      return cost;
     },
-    checkout() {
-      const vm = this;
-      setTimeout(() => {
-        vm.removeCart();
-        alert("Purchase successful!");
-        vm.$router.push("/");
-      }, 2000);
+  deleteItemFromCart(productId,merchantId){
+    console.log(productId,merchantId);
+    let delUrl="http://localhost:8087/cart/delproduct/"+this.$store.state.Id+'/'+productId+'/'+merchantId
+      axios.delete(delUrl)
+                .then( (response) => {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                this.getCartUpdate();
+    // TODO SEND userid,productId,merchantId
+    // TODO update the store of cart
+  },
+  viewItemInCart(productId){
+    console.log(productId);
+    this.$store.state.id=productId;
+    this.$router.push({name:"productCard"});  
+    // TODO SEND productId
+  },
+  getCartUpdate(){
+      let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
+      axios.get(urlcart)
+            .then((response)=>{
+                console.log(response);
+                this.saveInCart(response);
+            });
+            this.$router.push({path:"/cart"}); 
     },
+  saveInCart(response){
+      this.$store.state.userCart = response.data;
+      // return response.data;
+      console.log(this.$store.state.userCart);
+    },
+  checkout(){
+    console.log("checkout");
+    this.$store.state.id;
+    axios.delete("http://localhost:8087/cart/cartdel/",this.$store.state.id)
+                .then( (response) => {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                this.getCartUpdate();
+    // TODO SEND productId
+    // TODO empty the store of cart
+  }
   },
-  mounted() {
-    this.calcPrice();
-  },
-};
+}
 </script>
-<style>
+
+
+<style scoped>
+
+.cart-card-page{
+  width: 70%;
+  margin: auto;
+}
+
+.cart-card{
+  display: flex;
+  justify-content: space-around;
+  background-color:#F5F5F5;
+  margin: 10px 0;
+  padding: 20px;
+}
+
+.view-item{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+}
+
+.view-item:hover{
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+  background-color: white;
+} 
+
+.delete-item{
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.delete-item:hover{
+  color: #008CBA;
+  border: 1px solid #008CBA;
+  background-color: white;
+} 
+
+
 </style>

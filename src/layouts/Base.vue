@@ -34,15 +34,24 @@
     <!-- <div >
     <ProductCartCollection></ProductCartCollection>
     <div> -->
+      <form @submit.prevent="getCart">
+        <button type="submit" class="btn btn-primary my-2 my-sm-0">
+              <img
+                src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
+                width="50"
+                alt
+              />
+        </button>
+              <!-- <span class="badge badge-danger badge-pill">0</span>  -->
+              <!-- //To do  -->
+      </form>
     </div>
     <div class="page-container">
       <router-view />
       <ProductsView/>
     </div>
     
-      <form @submit.prevent="getSingleProduct">
-        <button type="submit">card</button> 
-      </form>
+      
     <!-- Footer -->
 <footer class="bg-light text-center text-lg-start">
   <!-- Grid container -->
@@ -132,6 +141,20 @@ export default {
       this.$store.state.productList = response.data;
       // return response.data;
       console.log(this.$store.state.productList);
+      },
+    getCart(){
+      let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
+      axios.get(urlcart)
+            .then((response)=>{
+                console.log(response);
+                this.saveInCart(response);
+            });
+            this.$router.push({path:"/cart"}); 
+    },
+    saveInCart(response){
+      this.$store.state.userCart = response.data;
+      // return response.data;
+      console.log(this.$store.state.userCart);
       },
     getUser(){
       let get = this.$store.state.Id
