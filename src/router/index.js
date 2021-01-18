@@ -49,6 +49,11 @@ const routes = [
   {
     path: '/updateuser',
     component:() => import('../views/account/UpdateUser.vue')
+  },
+  {
+    path: '/productCard',
+    name: 'productCard',
+    component:() => import('../views/home/Details.vue')
   }
 ]
 

@@ -9,6 +9,9 @@ export const store =  new Vuex.Store({
       // merDetails:[],
       productList:[],
       userDetails:{},
-      userName: ""
+      userName: "",
+      mainProducts:[],
+      singleProduct: {},
+      productId: 1
     }
   })

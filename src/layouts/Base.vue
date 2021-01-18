@@ -31,11 +31,18 @@
           <router-link class="btn btn-primary my-2 my-sm-0" to="/login">Login</router-link>
         </div>
       </nav>-->
+    <!-- <div >
+    <ProductCartCollection></ProductCartCollection>
+    <div> -->
     </div>
     <div class="page-container">
       <router-view />
+      <ProductsView/>
     </div>
-
+    
+      <form @submit.prevent="getSingleProduct">
+        <button type="submit">card</button> 
+      </form>
     <!-- Footer -->
 <footer class="bg-light text-center text-lg-start">
   <!-- Grid container -->
@@ -101,13 +108,31 @@
 
 
 <script>
+// import ProductCartCollection from '../components/products/ProductCartCollection' 
+
 import axios from 'axios'
+import ProductsView from '../views/home/ProductsView.vue';
+// import router from 'router'
 export default {
+  components: { ProductsView },
   name: "Base",
   computed: {
-   
+  //  ProductCartCollection
   },
   methods: {
+    getProduct(){
+      axios.get('http://localhost:8085/myproduct/getProducts/')
+            .then((response)=>{
+                console.log(response);
+                this.saveInProd(response);
+            });
+            // this.$router.push({name:''}); 
+    },
+    saveInProd(response){
+      this.$store.state.productList = response.data;
+      // return response.data;
+      console.log(this.$store.state.productList);
+      },
     getUser(){
       let get = this.$store.state.Id
             console.log(get)
@@ -124,7 +149,10 @@ export default {
             console.log("Hello");
            this.$router.push({path:'/user'}); 
     }
-  }
+  },
+   beforeMount(){
+    this.getProduct()
+ }
 };
 </script>
 
