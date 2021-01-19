@@ -19,25 +19,24 @@ export default {
   methods:{
     searchProduct(){
       console.log(this.search);
-      let urlSearch = "http://localhost:8085/searchproduct/custom/"+this.search;
+      let urlSearch = "http://localhost:8089/searchproduct/custom/"+this.search;
       axios.get(urlSearch)
             .then((response)=>{
                 console.log(response);
                 this.saveInSearch(response);
             });
-            // this.$router.push({name:''}); 
+            this.$router.push({name:'search'}); 
      },
       saveInSearch(response){
-      this.$store.state.productList = response.data;
-      // return response.data;
-      console.log(this.$store.state.productList);
+      this.$store.state.searchedProducts = response.data;
+      console.log(this.$store.state.searchedProducts);
       },
 
       // TODO send it to search "searchproduct/custom/{text}" (GET request);
       // TODO you get all the  products and store in store
+      //Done
     }
   }
-}
 </script>
 
 <style scoped>

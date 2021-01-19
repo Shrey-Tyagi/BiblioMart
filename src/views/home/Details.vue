@@ -34,6 +34,9 @@
           <form @submit.prevent="addToCart">
             <br><button class="product-button"> Add to Cart </button>
           </form>
+          <form @submit.prevent="getCartUpdate">
+            <br><button class="product-button"> Go to Cart </button>
+          </form>
         </div>
     </div>
   </section>
@@ -91,7 +94,21 @@ export default {
                 // this.$router.push({name:'MerchantProduct'})
 
       }
-    }
+    },
+     getCartUpdate(){
+      let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
+      axios.get(urlcart)
+            .then((response)=>{
+                console.log(response);
+                this.saveInCart(response);
+            });
+            this.$router.push({path:"/cart"}); 
+    },
+    saveInCart(response){
+        this.$store.state.userCart = response.data;
+        // return response.data;
+        console.log(this.$store.state.userCart);
+      }
   },
   computed:{
     product(){

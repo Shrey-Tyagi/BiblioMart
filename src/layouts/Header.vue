@@ -1,7 +1,5 @@
-// /src/Layout/Base.html
 <template>
-  <div>
-      <nav class="main-flex" v-if="$store.state.Id != -1">
+          <nav class="main-flex" v-if="$store.state.Id != -1">
         <div class="tag-flex"> <h2> BiblioMart </h2> </div>
       <div class="flex-class-nav">
         <div class="child-flex-class-nav">
@@ -29,7 +27,7 @@
         <div class="tag-flex"> <h2> BiblioMart </h2> </div>
       <div class="flex-class-nav">
         <div class="child-flex-class-nav">
-         <Search/>
+          <Search/>
         </div>
         <div class="child-flex-class-nav">
           <router-link to="/register">
@@ -54,80 +52,16 @@
         </div>
       </div>
       </nav>
-    <div class="page-container">
-      <router-view />
-      <ProductsView/>
-    </div>
-  </div>
 </template>
-
 <script>
-
-
-import axios from 'axios'
-import ProductsView from '../views/home/ProductsView.vue';
 import Search from '../views/home/Search.vue';
-
-// import router from 'router'
 export default {
-  components: { ProductsView, Search },
-  name: "Base",
-  computed: {
-  //  ProductCartCollection
-  },
-  methods: {
-    getProduct(){
-      axios.get('http://localhost:8085/myproduct/getProducts/')
-            .then((response)=>{
-                console.log(response);
-                this.saveInProd(response);
-            });
-            // this.$router.push({name:''}); 
-    },
-    saveInProd(response){
-      this.$store.state.productList = response.data;
-      // return response.data;
-      console.log(this.$store.state.productList);
-      },
-    getCart(){
-      let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
-      axios.get(urlcart)
-            .then((response)=>{
-                console.log(response);
-                this.saveInCart(response);
-            });
-            this.$router.push({path:"/cart"}); 
-    },
-    saveInCart(response){
-      this.$store.state.userCart = response.data;
-      // return response.data;
-      console.log(this.$store.state.userCart);
-      },
-    getUser(){
-      let get = this.$store.state.Id
-            console.log(get)
-            let httpAddress = "http://localhost:8082/registration/profile/"+get;
-            console.log(httpAddress);
-            axios.get(httpAddress)
-            .then((response)=>{
-                console.log(response);
-                this.$store.state.userDetails= response.data;
-              this.$store.state.Id = response.data.userId;
-              //return response.data;
-                // this.saveInMer(response);
-            });
-            console.log("Hello");
-           this.$router.push({path:'/user'}); 
-    }
-  },
-   beforeMount(){
-    this.getProduct()
- }
-};
+    components: { ProductsView, Search },
+    name:"Header"
+}
 </script>
 
-//cs-ecommerce/src/layout/Base.vue
-<style>
+<style scoped>
 nav {
   background-color: teal;
 }

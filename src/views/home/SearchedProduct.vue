@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "SearchedProduct",
   computed:{
@@ -24,9 +25,22 @@ export default {
   methods:{
     product(productId){
       console.log(productId);
+      this.$store.state.productId=productId;
+      let productUrl='http://localhost:8085/myproduct/'+productId
+          axios.get(productUrl)
+          .then((response)=>{
+              console.log(response);
+              this.saveInSingleProd(response);
+          });
+          this.$router.push({name:'productCard'}); 
+            
+      },
+      saveInSingleProd(response){
+      this.$store.state.singleProduct = response.data;
+      console.log(this.$store.state.singleProduct);
+      },
       // TODO send the productId and get route to product page
     }
-  }
 }
 </script>
 
