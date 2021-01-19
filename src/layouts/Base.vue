@@ -62,7 +62,15 @@
       <router-view />
       <ProductsView/>
     </div>
+     <div>
+    <router-link to="/merchantRegister">
+      <button type="submit" class="btn btn-primary my-2 my-sm-0">
+              Merchant Registration
+    </button>
+     </router-link>
   </div>
+  </div>
+ 
 </template>
 
 <script>

@@ -1,8 +1,11 @@
 <template>
 <div>
-    <h2> Products of Login </h2>
+    <h2> Products of Merchant </h2>
     <div v-for="product in getData" :key="product.productName" class="container-productList" >
         <div class="card-product">
+            <div class="form-card">
+                <img :src="product.imageUrl" alt="No Img" width="90%">
+            </div>
             <div class="form-card">
                 <p><b>Product Name :</b> {{ product.productName }}</p>
             </div>
@@ -92,6 +95,10 @@ h2{
 
 .container-productList{
     margin: 10px 0 ;
+}
+
+.form-card{
+    width: 20%;
 }
 
   p{

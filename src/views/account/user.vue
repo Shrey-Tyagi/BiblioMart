@@ -55,7 +55,8 @@ export default {
         getData(){
             return this.$store.state.userDetails;
         },
-    method: {
+    },
+    methods: {
         OrderHistory(){
          
             let urlOrder='http://localhost:8088/order/timeStamps/'+this.$store.state.Id;
@@ -71,10 +72,8 @@ export default {
         // return response.data;
         console.log(this.$store.state.orderHistory);
         },
-
         }
-
-        }
+        
     }
 </script>
 

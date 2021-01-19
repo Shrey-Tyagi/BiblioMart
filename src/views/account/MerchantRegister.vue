@@ -106,9 +106,9 @@ export default {
 
 
 <style scoped>
-div {
+/* div {
   box-shadow: 10px 10px 5px grey;
-}
+} */
 .body-main{
     box-sizing: border-box;
     font-size: 13px;
