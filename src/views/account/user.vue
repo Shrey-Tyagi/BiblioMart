@@ -59,7 +59,7 @@ export default {
     methods: {
         OrderHistory(){
          
-            let urlOrder='http://10.177.1.69:8089/order/timeStamps/'+this.$store.state.Id;
+            let urlOrder=this.$store.state.order+'/order/timeStamps/'+this.$store.state.Id;
             axios.get(urlOrder)
                 .then((response)=>{
                         console.log(response);

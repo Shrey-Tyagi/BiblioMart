@@ -19,7 +19,7 @@ export default {
   methods:{
     searchProduct(){
       console.log(this.search);
-      let urlSearch = "http://10.177.1.69:8089/searchproduct/custom/"+this.search;
+      let urlSearch = this.$store.state.search+"/searchproduct/custom/"+this.search;
       axios.get(urlSearch)
             .then((response)=>{
                 console.log(response);
@@ -58,7 +58,7 @@ form.example button {
   float: left;
   width: 20%;
   padding: 10px;
-  background: #2196F3;
+  background: #065F46;
   color: white;
   font-size: 17px;
   border: 1px solid grey;

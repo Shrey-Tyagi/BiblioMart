@@ -38,13 +38,13 @@ export default {
   totalCost(){
     let cost = 0;
       for(let i =0;i<this.getCart.length;i++){
-        cost += parseInt(this.getCart[i].cost);
+        cost += parseInt(this.getCart[i].cost)*parseInt(this.getCart[i].quantity);
       }
       return cost;
     },
   deleteItemFromCart(productId,merchantId){
     console.log(productId,merchantId);
-    let delUrl="http://10.177.1.69:8089/cart/delproduct/"+this.$store.state.Id+'/'+productId+'/'+merchantId;
+    let delUrl=this.$store.state.cart+"/cart/delproduct/"+this.$store.state.Id+'/'+productId+'/'+merchantId;
       axios.delete(delUrl)
                 .then( (response) => {
                     console.log(response);
@@ -65,7 +65,7 @@ export default {
     // TODO SEND productId
   },
   getCartUpdate(){
-      let urlcart = 'http://10.177.1.69:8089/cart/getcart/'+this.$store.state.Id
+      let urlcart = this.$store.state.cart+'/cart/getcart/'+this.$store.state.Id
       axios.get(urlcart)
             .then((response)=>{
                 console.log(response);
@@ -83,8 +83,13 @@ export default {
       this.$router.push({path:"/login"});
     }
     else{
-      console.log("checkout");
-      let urlDel="http://10.177.1.69:8089/cart/cartdel/"+this.$store.state.Id;
+    
+      console.log("checkout*******************************");
+      let urlorder=this.$store.state.order+"/order/orderadd/"+this.$store.state.Id+"/"+this.$store.state.userDetails.email;
+      let urlDel=this.$store.state.cart+"/cart/cartdel/"+this.$store.state.Id;
+      console.log(urlorder);
+      console.log(this.$store.state.userCart)
+      axios.post(urlorder,this.$store.state.userCart)
       axios.delete(urlDel)
                   .then( (response) => {
                       console.log(response);

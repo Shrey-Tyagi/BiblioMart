@@ -49,7 +49,7 @@ export default {
                 quantity : this.quantity
             }
             console.log(data);
-            axios.post('http://10.177.1.69:8089/merchant/updateByMerchant',data)
+            axios.post(this.$store.state.merchant+'/merchant/updateByMerchant',data)
                 .then( (response) => {
                     console.log(response);
                     this.$store.state.productList = response.data.productDetails;

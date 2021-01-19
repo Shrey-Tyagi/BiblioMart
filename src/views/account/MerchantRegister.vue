@@ -73,7 +73,7 @@ export default {
               'password':this.password,
               "email":this.email
           }
-          axios.post('http://10.177.1.69:8089/merchant/register', data)
+          axios.post(this.$store.state.merchant+'/merchant/register', data)
             .then( (response) => {
                 console.log(response);
                 this.saveInStore(response);

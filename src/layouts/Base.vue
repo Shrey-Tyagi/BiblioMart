@@ -1,7 +1,7 @@
 <template>
   <div>
       <nav class="main-flex" v-if="$store.state.Id != -1">
-        <div class="tag-flex"> <h2> BiblioMart </h2> </div>
+        <div class="tag-flex"> <h2> BiblioMart</h2> </div>
       <div class="flex-class-nav">
         <div class="child-flex-class-nav">
           <Search/>
@@ -24,7 +24,7 @@
         </div>
         <div class="child-flex-class-nav">
           <form @submit.prevent="logout()">
-            <button>  LogOut </button>
+            <button class= "btn-nav">  LogOut </button>
           </form>
         </div>
       </div>
@@ -37,17 +37,17 @@
         </div>
         <div class="child-flex-class-nav">
           <router-link to="/register">
-            <button> Register </button>
+            <button class= "btn-nav"> Register </button>
           </router-link>
         </div>
         <div class="child-flex-class-nav">
          <router-link to="/login">
-            <button> Login </button>
+            <button class= "btn-nav"> Login </button>
          </router-link>
          </div>
         <div class="child-flex-class-nav">
           <form @submit.prevent="getCart()">
-              <button type="submit" class="btn btn-primary my-2 my-sm-0">
+              <button type="submit" class="btn btn-primary my-2 my-sm-0 cart" >
                   <img
                     src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
                     width="50"
@@ -63,11 +63,58 @@
       <ProductsView/>
     </div>
      <div>
-    <router-link to="/merchantRegister">
-      <button type="submit" class="btn btn-primary my-2 my-sm-0">
-              Merchant Registration
-    </button>
-     </router-link>
+        <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">Biblio.com  - This application is built to provide the one-stop platform for a book lover or book finder to sell and buy old and new books
+
+- The app provides the contact details of the seller and brings the buyer and seller close
+
+- Well managed categories and custom search to find the book you are searching for very easily
+
+- Very easy and understandable UI/UX</p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Makers</h6>
+            <ul class="footer-links">
+              <li><a href="http://scanfcode.com/category/c-language/">Shikhar</a></li>
+              <li><a href="http://scanfcode.com/category/front-end-development/">Dinesh</a></li>
+              <li><a href="http://scanfcode.com/category/back-end-development/">Shrey</a></li>
+              <li><a href="http://scanfcode.com/category/java-programming-language/">Vasavi</a></li>
+              <li><a href="http://scanfcode.com/category/android/">Vraj</a></li>
+              <li><a href="http://scanfcode.com/category/templates/">Amit</a></li>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+           <router-link to="/merchantRegister">
+              <button type="submit" class="btn my-2 my-sm-0">
+                  Merchant Registration
+              </button>
+          </router-link>
+          <router-link to="/MerchantProduct">
+              <button type="submit" class="btn my-2 my-sm-0">
+                  Merchant Products
+              </button>
+          </router-link>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by 
+         <a href="#">BiblioMart</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+</footer>
   </div>
   </div>
  
@@ -104,7 +151,7 @@ export default {
       this.$router.push({name:"home"})
     },
     getProduct(){
-      axios.get('http://10.177.1.69:8089/myproduct/getProducts/')
+      axios.get(this.$store.state.product + '/myproduct/getProducts/')
             .then((response)=>{
                 console.log(response);
                 this.saveInProd(response);
@@ -117,9 +164,9 @@ export default {
       console.log(this.$store.state.mainProductList);
       },
     getCart(){
-      let urlcart = 'http://10.177.1.69:8089/cart/getcart/'+this.$store.state.Id
+      let urlcart = this.$store.state.cart+'/cart/getcart/'+this.$store.state.Id
        if(this.$store.state.guestUserId != -1){
-        urlcart = 'http://10.177.1.69:8089/cart/getcart/'+this.$store.state.guestUserId
+        urlcart = this.$store.state.cart+'/cart/getcart/'+this.$store.state.guestUserId
        }
       axios.get(urlcart)
             .then((response)=>{
@@ -136,7 +183,7 @@ export default {
     getUser(){
       let get = this.$store.state.Id
             console.log(get)
-            let httpAddress = "http://10.177.1.69:8089/registration/profile/"+get;
+            let httpAddress = this.$store.state.registration+"/registration/profile/"+get;
             console.log(httpAddress);
             axios.get(httpAddress)
             .then((response)=>{
@@ -158,8 +205,13 @@ export default {
 
 //cs-ecommerce/src/layout/Base.vue
 <style>
+
+
+.cart{
+background-color:#4C1D95
+}
 nav {
-  background-color: teal;
+  background-color: #059669;
 }
 .navbar-brand {
   font-weight: bold;
@@ -176,8 +228,8 @@ nav {
 .btn {
   border-radius: 0%;
   font-weight: bold;
-  background: teal;
-  border: teal;
+  background: #059669;
+  border: #064E3B;
 }
 .btn:hover {
   background: #00b4b4;
@@ -207,10 +259,179 @@ input {
 }
 
 .tag-flex{
+  margin-top:14px ;
   align-self: center;
   margin-left: 50px;
-  color: palevioletred;
+  color: black;
   align-self: center;
+}
+
+ .btn-nav{
+   background-color: #064E3B;
+   color: white;
+ }
+ .site-footer
+{
+  background-color:#065F46;
+  padding:45px 0 20px;
+  font-size:15px;
+  line-height:24px;
+  color:#737373;
+}
+.site-footer hr
+{
+  border-top-color:#bbb;
+  opacity:0.5
+}
+.site-footer hr.small
+{
+  margin:20px 0
+}
+.site-footer h6
+{
+  color:#fff;
+  font-size:16px;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+}
+.site-footer a
+{
+  color:#737373;
+}
+.site-footer a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links
+{
+  padding-left:0;
+  list-style:none
+}
+.footer-links li
+{
+  display:block
+}
+.footer-links a
+{
+  color:#737373
+}
+.footer-links a:active,.footer-links a:focus,.footer-links a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links.inline li
+{
+  display:inline-block
+}
+.site-footer .social-icons
+{
+  text-align:right
+}
+.site-footer .social-icons a
+{
+  width:40px;
+  height:40px;
+  line-height:40px;
+  margin-left:6px;
+  margin-right:0;
+  border-radius:100%;
+  background-color:#33353d
+}
+.copyright-text
+{
+  margin:0
+}
+@media (max-width:991px)
+{
+  .site-footer [class^=col-]
+  {
+    margin-bottom:30px
+  }
+}
+@media (max-width:767px)
+{
+  .site-footer
+  {
+    padding-bottom:0
+  }
+  .site-footer .copyright-text,.site-footer .social-icons
+  {
+    text-align:center
+  }
+}
+.social-icons
+{
+  padding-left:0;
+  margin-bottom:0;
+  list-style:none
+}
+.social-icons li
+{
+  display:inline-block;
+  margin-bottom:4px
+}
+.social-icons li.title
+{
+  margin-right:15px;
+  text-transform:uppercase;
+  color:#96a2b2;
+  font-weight:700;
+  font-size:13px
+}
+.social-icons a{
+  background-color:#eceeef;
+  color:#818a91;
+  font-size:16px;
+  display:inline-block;
+  line-height:44px;
+  width:44px;
+  height:44px;
+  text-align:center;
+  margin-right:8px;
+  border-radius:100%;
+  -webkit-transition:all .2s linear;
+  -o-transition:all .2s linear;
+  transition:all .2s linear
+}
+.social-icons a:active,.social-icons a:focus,.social-icons a:hover
+{
+  color:#fff;
+  background-color:#29aafe
+}
+.social-icons.size-sm a
+{
+  line-height:34px;
+  height:34px;
+  width:34px;
+  font-size:14px
+}
+.social-icons a.facebook:hover
+{
+  background-color:#3b5998
+}
+.social-icons a.twitter:hover
+{
+  background-color:#00aced
+}
+.social-icons a.linkedin:hover
+{
+  background-color:#007bb6
+}
+.social-icons a.dribbble:hover
+{
+  background-color:#ea4c89
+}
+@media (max-width:767px)
+{
+  .social-icons li.title
+  {
+    display:block;
+    margin-right:0;
+    font-weight:600
+  }
 }
 
 /* div {

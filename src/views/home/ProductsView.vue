@@ -23,7 +23,7 @@ export default {
     getSingleProduct(productId){
       this.$store.state.productId=productId
       let PId=this.$store.state.productId
-      let productUrl='http://10.177.1.69:8089/myproduct/'+PId
+      let productUrl=this.$store.state.product+'/myproduct/'+PId
           axios.get(productUrl)
           .then((response)=>{
               console.log(response);
@@ -43,6 +43,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+
+
 ul {
   list-style-type: none;
   padding: 0;

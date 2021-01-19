@@ -90,7 +90,7 @@ export default {
               "accessTokenFb": 0,
               "accessTokenGmail": 0
               }
-            axios.post('http://10.177.1.69:8089/registration', get)
+            axios.post(this.$store.state.registration+'/registration', get)
             .then((response)=>{
                 console.log(response);
                 this.saveInUser(response);

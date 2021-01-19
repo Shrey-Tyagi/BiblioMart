@@ -35,7 +35,7 @@ export default {
             console.log(this.date);
         },
         getLoginDetails() {
-            let httpAddress1 = 'hhttp://10.177.1.69:8089/registration/loginHistory/'+this.date.toString()+'/'+this.$store.state.Id
+            let httpAddress1 = this.$store.state.registration+'/registration/loginHistory/'+this.date.toString()+'/'+this.$store.state.Id
             console.log(httpAddress1);
               axios.get(httpAddress1)
             .then((response)=>{

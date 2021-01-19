@@ -57,7 +57,7 @@ export default {
   getData(){
             let get = {"email":this.email,"password":this.password}
             console.log(get)
-            axios.post('http://10.177.1.69:8089/merchant/login/',get)
+            axios.post(this.$store.state.merchant+'/merchant/login/',get)
             .then((response)=>{
                 console.log(response);
                 this.saveInMer(response);
@@ -74,7 +74,7 @@ export default {
   this.$store.state.userName= response.data.name;
   },
   getCartUpdate(){
-      let urlcart = 'http://10.177.1.69:8089/cart/getcart/'+this.$store.state.guestUserId
+      let urlcart = this.$store.state.cart+'/cart/getcart/'+this.$store.state.guestUserId
       axios.get(urlcart)
             .then((response)=>{
                 console.log(response);
@@ -92,7 +92,7 @@ export default {
   }
   let get = {"email":this.email,"password":this.password}
   console.log(get);
-  axios.post('http://10.177.1.69:8089/registration/login/',get)
+  axios.post(this.$store.state.registration+'/registration/login/',get)
             .then((response)=>{
                 console.log(response);
                 this.saveInUser(response);
@@ -114,7 +114,7 @@ export default {
           "merchantId":merchantId,
           "cost":cost
         }
-    axios.post('http://10.177.1.69:8089/cart/cartadd',addToCartdata)
+    axios.post(this.$store.state.cart+'/cart/cartadd',addToCartdata)
                 .then( (response) => {
                     console.log(response);
                 })
@@ -129,7 +129,7 @@ export default {
 
 ////
 ////
-      let urlDel="http://10.177.1.69:8089/cart/cartdel/"+this.$store.state.guestUserId;
+      let urlDel=this.$store.state.cart+"/cart/cartdel/"+this.$store.state.guestUserId;
       axios.delete(urlDel)
                   .then( (response) => {
                       console.log(response);
@@ -166,9 +166,9 @@ this.$store.state.guestUserId=-1;
   border: teal;
 }
 .btn:hover {
-  background: #00b4b4;
+  background: #6b42b6;
 }
 .btn:focus {
-  background: teal;
+  background: rgb(122, 23, 250);
 }
 </style>
