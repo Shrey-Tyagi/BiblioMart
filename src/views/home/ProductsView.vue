@@ -1,10 +1,10 @@
 <template>
   <div class="hello">
     <div class="product-list-flex">
-      <div class="each-product-flex" v-for="productlist in productList" :key="productlist.productId">
+      <div class="each-product-flex" v-for="mainProductList in mainProductList" :key="mainProductList.productId">
           <img alt="Vue logo" src="https://www.w3schools.com/css/pineapple.jpg" width = "60%">
-        <h3>{{ productlist.catName }}</h3>
-        <button class="product-button" @click="getSingleProduct(productlist.productId)" >{{ productlist.productName }}</button>
+        <h3>{{ mainProductList.catName }}</h3>
+        <button class="product-button" @click="getSingleProduct(mainProductList.productId)" >{{ mainProductList.productName }}</button>
         </div>
     </div>
   </div>
@@ -15,8 +15,8 @@ import axios from'axios'
 export default {
   name: 'ProductView',
   computed:{
-    productList(){
-      return this.$store.state.productList;
+    mainProductList(){
+      return this.$store.state.mainProductList;
     }
   },
   methods:{

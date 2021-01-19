@@ -1,4 +1,3 @@
-// /src/Layout/Base.html
 <template>
   <div>
       <nav class="main-flex" v-if="$store.state.Id != -1">
@@ -21,6 +20,11 @@
                     alt
                   />
             </button>
+          </form>
+        </div>
+        <div class="child-flex-class-nav">
+          <form @submit.prevent="logout()">
+            <button>  LogOut </button>
           </form>
         </div>
       </div>
@@ -76,6 +80,21 @@ export default {
   //  ProductCartCollection
   },
   methods: {
+    logout(){
+      this.$store.state.Id = -1;
+      //this.$store.state.productList = [],
+      this.$store.state.userDetails = {},
+      this.$store.state.userName = "",
+      this.$store.state.mainProducts = [],
+      this.$store.state.singleProduct = {},
+      this.$store.state.productId= 1,
+      this.$store.state.userCart= [],
+      this.$store.state.orderHistory= [],
+      this.$store.state.orderProduct={},
+      this.$store.state.searchedProducts=[],
+      this.$store.state.guestUserId = -1
+      this.$router.push({name:"home"})
+    },
     getProduct(){
       axios.get('http://localhost:8085/myproduct/getProducts/')
             .then((response)=>{
@@ -85,9 +104,9 @@ export default {
             // this.$router.push({name:''}); 
     },
     saveInProd(response){
-      this.$store.state.productList = response.data;
+      this.$store.state.mainProductList = response.data;
       // return response.data;
-      console.log(this.$store.state.productList);
+      console.log(this.$store.state.mainProductList);
       },
     getCart(){
       let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
@@ -182,5 +201,9 @@ input {
   color: palevioletred;
   align-self: center;
 }
+
+/* div {
+  box-shadow: 10px 10px 5px #5F9EA0;
+} */
 
 </style>

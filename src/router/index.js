@@ -6,9 +6,10 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'home',
     component: () => import('../layouts/Base.vue'),
     children: [ 
-      { path: '', name: "product", component: () => import('../views/home/Products.vue') },
+      // { path: '', name: "product", component: () => import('../views/home/Products.vue') },
       { path: 'details/:idProduct', component: () => import('../views/home/Details.vue') }
     ],
   },

@@ -7,6 +7,7 @@ export const store =  new Vuex.Store({
     state : {
       Id: -1,
       // merDetails:[],
+      mainProductList:[],
       productList:[],
       userDetails:{},
       userName: "",
@@ -16,6 +17,7 @@ export const store =  new Vuex.Store({
       userCart: [],
       orderHistory: [],
       orderProduct:{},
-      searchedProducts:[]
+      searchedProducts:[],
+      guestUserId : -1
     }
   })

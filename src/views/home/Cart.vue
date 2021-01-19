@@ -79,20 +79,25 @@ export default {
       console.log(this.$store.state.userCart);
     },
   checkout(){
-    console.log("checkout");
-    let urlDel="http://localhost:8087/cart/cartdel/"+this.$store.state.Id;
-    axios.delete(urlDel)
-                .then( (response) => {
-                    console.log(response);
-                    this.getCartUpdate();
-                })    
-                .catch(function (error) {
-                    console.log(error);
-                });
-                
-                
-    // TODO SEND productId
-    // TODO empty the store of cart
+    if(this.$store.state.Id == -1){
+      this.$router.push({path:"/login"});
+    }
+    else{
+      console.log("checkout");
+      let urlDel="http://localhost:8087/cart/cartdel/"+this.$store.state.Id;
+      axios.delete(urlDel)
+                  .then( (response) => {
+                      console.log(response);
+                      this.getCartUpdate();
+                  })    
+                  .catch(function (error) {
+                      console.log(error);
+                  });
+                  
+                  
+      // TODO SEND productId
+      // TODO empty the store of cart
+    }
   }
   },
 }

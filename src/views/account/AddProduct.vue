@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="onSubmit">
-    <div class="form-group">
+    <div class="form-group box-shadow">
         <fieldset id="categoryName">
             <legend>Category Names</legend>
             <p>
@@ -22,6 +22,11 @@
     <div class="form-group">
       <label for="productDescription">Product description</label>
       <textarea class="form-control"  id="productDescription" rows="3" maxlength="128" placeholder="Enter description" v-model = "productDescription" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="ProductImage">Image of Product</label>
+      <input class="form-control"  id="ProductImage" type="file" @change="previewImage" accept="image/*">
+      <button @click="onUpload">Upload Image</button>
     </div>
     <div class="form-group">
       <label for="price">Quantity</label>
@@ -54,6 +59,7 @@
 
 
 <script>
+import firebase from 'firebase';
 import axios from 'axios'
 export default {
     name:  "AddProduct",
@@ -61,6 +67,9 @@ export default {
 //   props: ['product'],
     data(){
         return{
+            imageData: null,
+            picture: null,
+            uploadValue: 0,
             category : "",
             productName : "",
             productDescription : "",
@@ -74,6 +83,30 @@ export default {
         }
     },
       methods: {
+        previewImage(event) {
+          this.uploadValue=0;
+          this.picture=null;
+          this.imageData = event.target.files[0];
+        },
+
+
+        onUpload(){
+          this.picture=null;
+          const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+          storageRef.on(`state_changed`,snapshot=>{
+            this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+          }, error=>{console.log(error.message)},
+          ()=>{this.uploadValue=100;
+            storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+              this.picture =url;
+              this.sendData();
+            });
+          }
+          );
+        },
+        sendData(){
+          console.log(this.picture);
+        },
         onSubmit () {
             this.productDetails = [{
                 "categoryName":this.category,
@@ -85,7 +118,7 @@ export default {
                 "publisher":this.publisher,
                 "author":this.author,
                 "edition":this.edition,
-                "imageUrl":"https://www.w3schools.com/css/img_5terre.jpg"
+                "imageUrl":this.picture,
                 }];
                 console.log(this.productDetails);
                 // TODO Get Merchant Id from store send this object {"merchantId": temp , productDetails}
@@ -101,7 +134,7 @@ export default {
                               "publisher":this.publisher,
                               "author":this.author,
                               "edition":this.edition,
-                              "imageUrl":"https://www.w3schools.com/css/img_5terre.jpg"
+                              "imageUrl":this.picture,
                               }]
                             }
                               
@@ -113,7 +146,7 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 });
-                
+
                 this.$router.push({name:'MerchantProduct'})
     },
 
@@ -125,7 +158,7 @@ export default {
 </script>
 
 <style scoped>
-
+div {
+  box-shadow: 10px 10px 5px grey;
+}
 </style>
-
-
