@@ -14,6 +14,9 @@
                 <input type="email" placeholder="Email Address" v-model="email" class="form-control" required>
                 <i class="zmdi zmdi-email"></i>
             </div>
+
+           
+          
             <div class="form-wrapper">
                 <select name="gender" id="gender" class="form-control" v-model="gender" required>
                     <option value="" disabled selected>Gender</option>
@@ -87,12 +90,12 @@ export default {
               "accessTokenFb": 0,
               "accessTokenGmail": 0
               }
-            axios.post('http://localhost:8082/registration', get)
+            axios.post('http://10.177.1.69:8089/registration', get)
             .then((response)=>{
                 console.log(response);
                 this.saveInUser(response);
             });
-            this.$router.push({name:'product'})
+            this.$router.push({name:'home'})
           
             // this.$router.push({name:'MerchantProduct'}); 
         },

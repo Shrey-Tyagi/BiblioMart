@@ -104,7 +104,7 @@ export default {
       this.$router.push({name:"home"})
     },
     getProduct(){
-      axios.get('http://localhost:8085/myproduct/getProducts/')
+      axios.get('http://10.177.1.69:8089/myproduct/getProducts/')
             .then((response)=>{
                 console.log(response);
                 this.saveInProd(response);
@@ -117,9 +117,9 @@ export default {
       console.log(this.$store.state.mainProductList);
       },
     getCart(){
-      let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
+      let urlcart = 'http://10.177.1.69:8089/cart/getcart/'+this.$store.state.Id
        if(this.$store.state.guestUserId != -1){
-        urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.guestUserId
+        urlcart = 'http://10.177.1.69:8089/cart/getcart/'+this.$store.state.guestUserId
        }
       axios.get(urlcart)
             .then((response)=>{
@@ -136,7 +136,7 @@ export default {
     getUser(){
       let get = this.$store.state.Id
             console.log(get)
-            let httpAddress = "http://localhost:8082/registration/profile/"+get;
+            let httpAddress = "http://10.177.1.69:8089/registration/profile/"+get;
             console.log(httpAddress);
             axios.get(httpAddress)
             .then((response)=>{

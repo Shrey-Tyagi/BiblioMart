@@ -19,7 +19,7 @@ export default {
   methods:{
     searchProduct(){
       console.log(this.search);
-      let urlSearch = "http://localhost:8089/searchproduct/custom/"+this.search;
+      let urlSearch = "http://10.177.1.69:8089/searchproduct/custom/"+this.search;
       axios.get(urlSearch)
             .then((response)=>{
                 console.log(response);

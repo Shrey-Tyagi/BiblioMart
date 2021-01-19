@@ -77,7 +77,7 @@ export default {
               "accessTokenFb": 0,
               "accessTokenGmail": 0
               }
-            axios.put('http://localhost:8082/registration/updateProfile', get)
+            axios.put('http://10.177.1.69:8089/registration/updateProfile', get)
             .then((response)=>{
                 console.log(response);
                 this.saveInUser(response);

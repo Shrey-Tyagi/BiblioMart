@@ -26,7 +26,7 @@ export default {
     product(productId){
       console.log(productId);
       this.$store.state.productId=productId;
-      let productUrl='http://localhost:8085/myproduct/'+productId
+      let productUrl='http://10.177.1.69:8089/myproduct/'+productId
           axios.get(productUrl)
           .then((response)=>{
               console.log(response);

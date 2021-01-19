@@ -138,7 +138,7 @@ export default {
                               }]
                             }
                               
-                axios.post('http://localhost:8083/merchant/addProduct',data)
+                axios.post('http://10.177.1.69:8089/merchant/addProduct',data)
                 .then( (response) => {
                     console.log(response);
                     this.$store.state.productList = response.data.productDetails;

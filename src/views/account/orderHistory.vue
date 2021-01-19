@@ -41,7 +41,7 @@ export default {
   methods:{
     ordersOfProduct(orderId){
     console.log(orderId);
-    let urlPro = "http://localhost:8088/order/getorder/" +orderId;
+    let urlPro = "http://10.177.1.69:8089/order/getorder/" +orderId;
     axios.get(urlPro)
             .then((response)=>{
                 console.log(response);

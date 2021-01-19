@@ -97,7 +97,7 @@ export default {
         /////
         // this.$store.state.userCart.push(addToCartdata);
         /////
-        axios.post('http://localhost:8087/cart/cartadd',addToCartdata)
+        axios.post('http://10.177.1.69:8089/cart/cartadd',addToCartdata)
                 .then( (response) => {
                     console.log(response);
                 })
@@ -109,9 +109,9 @@ export default {
       }
     },
     getCartUpdate(){
-       let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
+       let urlcart = 'http://10.177.1.69:8089/cart/getcart/'+this.$store.state.Id
        if(this.$store.state.guestUserId != -1){
-        urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.guestUserId
+        urlcart = 'http://10.177.1.69:8089/cart/getcart/'+this.$store.state.guestUserId
        }
       
       axios.get(urlcart)

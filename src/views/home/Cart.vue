@@ -44,7 +44,7 @@ export default {
     },
   deleteItemFromCart(productId,merchantId){
     console.log(productId,merchantId);
-    let delUrl="http://localhost:8087/cart/delproduct/"+this.$store.state.Id+'/'+productId+'/'+merchantId;
+    let delUrl="http://10.177.1.69:8089/cart/delproduct/"+this.$store.state.Id+'/'+productId+'/'+merchantId;
       axios.delete(delUrl)
                 .then( (response) => {
                     console.log(response);
@@ -65,7 +65,7 @@ export default {
     // TODO SEND productId
   },
   getCartUpdate(){
-      let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
+      let urlcart = 'http://10.177.1.69:8089/cart/getcart/'+this.$store.state.Id
       axios.get(urlcart)
             .then((response)=>{
                 console.log(response);
@@ -84,7 +84,7 @@ export default {
     }
     else{
       console.log("checkout");
-      let urlDel="http://localhost:8087/cart/cartdel/"+this.$store.state.Id;
+      let urlDel="http://10.177.1.69:8089/cart/cartdel/"+this.$store.state.Id;
       axios.delete(urlDel)
                   .then( (response) => {
                       console.log(response);

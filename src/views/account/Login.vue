@@ -57,7 +57,7 @@ export default {
   getData(){
             let get = {"email":this.email,"password":this.password}
             console.log(get)
-            axios.post('http://localhost:8083/merchant/login/',get)
+            axios.post('http://10.177.1.69:8089/merchant/login/',get)
             .then((response)=>{
                 console.log(response);
                 this.saveInMer(response);
@@ -74,7 +74,7 @@ export default {
   this.$store.state.userName= response.data.name;
   },
   getCartUpdate(){
-      let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.guestUserId
+      let urlcart = 'http://10.177.1.69:8089/cart/getcart/'+this.$store.state.guestUserId
       axios.get(urlcart)
             .then((response)=>{
                 console.log(response);
@@ -92,7 +92,7 @@ export default {
   }
   let get = {"email":this.email,"password":this.password}
   console.log(get);
-  axios.post('http://localhost:8082/registration/login/',get)
+  axios.post('http://10.177.1.69:8089/registration/login/',get)
             .then((response)=>{
                 console.log(response);
                 this.saveInUser(response);
@@ -114,7 +114,7 @@ export default {
           "merchantId":merchantId,
           "cost":cost
         }
-    axios.post('http://localhost:8087/cart/cartadd',addToCartdata)
+    axios.post('http://10.177.1.69:8089/cart/cartadd',addToCartdata)
                 .then( (response) => {
                     console.log(response);
                 })
@@ -129,7 +129,7 @@ export default {
 
 ////
 ////
-      let urlDel="http://localhost:8087/cart/cartdel/"+this.$store.state.guestUserId;
+      let urlDel="http://10.177.1.69:8089/cart/cartdel/"+this.$store.state.guestUserId;
       axios.delete(urlDel)
                   .then( (response) => {
                       console.log(response);

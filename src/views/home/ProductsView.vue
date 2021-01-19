@@ -23,7 +23,7 @@ export default {
     getSingleProduct(productId){
       this.$store.state.productId=productId
       let PId=this.$store.state.productId
-      let productUrl='http://localhost:8085/myproduct/'+PId
+      let productUrl='http://10.177.1.69:8089/myproduct/'+PId
           axios.get(productUrl)
           .then((response)=>{
               console.log(response);
