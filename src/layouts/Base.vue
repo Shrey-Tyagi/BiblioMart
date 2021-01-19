@@ -46,7 +46,7 @@
          </router-link>
          </div>
         <div class="child-flex-class-nav">
-          <form @submit.prevent="getCart">
+          <form @submit.prevent="getCart()">
               <button type="submit" class="btn btn-primary my-2 my-sm-0">
                   <img
                     src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
@@ -110,6 +110,9 @@ export default {
       },
     getCart(){
       let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
+       if(this.$store.state.guestUserId != -1){
+        urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.guestUserId
+       }
       axios.get(urlcart)
             .then((response)=>{
                 console.log(response);

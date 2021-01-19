@@ -73,7 +73,23 @@ export default {
   this.$store.state.Id= response.data.userId;
   this.$store.state.userName= response.data.name;
   },
+  getCartUpdate(){
+      let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.guestUserId
+      axios.get(urlcart)
+            .then((response)=>{
+                console.log(response);
+                this.saveInCart(response);
+            });
+    },
+  saveInCart(response){
+        this.$store.state.userCart = response.data;
+        // return response.data;
+        console.log(this.$store.state.userCart);
+      },
   getUser(){
+  if(this.$store.state.guestUserId!=-1){
+    this.getCartUpdate();
+  }
   let get = {"email":this.email,"password":this.password}
   console.log(get);
   axios.post('http://localhost:8082/registration/login/',get)
@@ -81,10 +97,56 @@ export default {
                 console.log(response);
                 this.saveInUser(response);
                 console.log(this.$store.state.Id);
+/////
+  let cartDetails = this.$store.state.userCart
+  for(let i=0;i<cartDetails.length;i++){
+    let userId = this.$store.state.Id;
+    let productId =cartDetails[i].productId;
+    let productName= cartDetails[i].productName;
+    let quantity = cartDetails[i].quantity;
+    let merchantId = cartDetails[i].merchantId;
+    let cost = cartDetails[i].price;
+      let addToCartdata = {
+          "userId": userId,
+          "productId" :productId,
+          "productName" :productName,
+          "quantity":quantity,
+          "merchantId":merchantId,
+          "cost":cost
+        }
+    axios.post('http://localhost:8087/cart/cartadd',addToCartdata)
+                .then( (response) => {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+  }
+
+// console.log('************************');
+// console.log(this.$store.state.userCart);
+// console.log('************************');
+
+////
+////
+      let urlDel="http://localhost:8087/cart/cartdel/"+this.$store.state.guestUserId;
+      axios.delete(urlDel)
+                  .then( (response) => {
+                      console.log(response);
+                      this.getCartUpdate();
+                  })    
+                  .catch(function (error) {
+                      console.log(error);
+                  });
+
+this.$store.state.guestUserId=-1;
+
+////
             });
-            this.$router.push({name:'product'});
-      }
+            this.$router.push({name:'home'});
+      },
   },
+      
 };
 </script>
 

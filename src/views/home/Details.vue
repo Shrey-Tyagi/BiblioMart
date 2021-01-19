@@ -84,6 +84,19 @@ export default {
           "cost":this.price
         }
         console.log(addToCartdata);
+        if(this.$store.state.guestUserId == -1 && this.$store.state.Id == -1){
+          this.$store.state.guestUserId = parseInt(new Date().getTime()/100000);
+          addToCartdata.userId=this.$store.state.guestUserId
+          console.log(addToCartdata.userId);
+        }
+        if(this.$store.state.Id == -1){
+          addToCartdata.userId=this.$store.state.guestUserId
+          }
+
+
+        /////
+        // this.$store.state.userCart.push(addToCartdata);
+        /////
         axios.post('http://localhost:8087/cart/cartadd',addToCartdata)
                 .then( (response) => {
                     console.log(response);
@@ -95,8 +108,12 @@ export default {
 
       }
     },
-     getCartUpdate(){
-      let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
+    getCartUpdate(){
+       let urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.Id
+       if(this.$store.state.guestUserId != -1){
+        urlcart = 'http://localhost:8087/cart/getcart/'+this.$store.state.guestUserId
+       }
+      
       axios.get(urlcart)
             .then((response)=>{
                 console.log(response);
