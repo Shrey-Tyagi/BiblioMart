@@ -37,6 +37,9 @@
                         <router-link to="/updateuser">
                         <button class="form-submit-user">Update Profile</button>
                         </router-link>
+                        <form @submit.prevent="OrderHistory">
+                        <button class="form-submit-user">Order History</button>
+                        </form>
                     </div>
                 </div>
         </section>
@@ -45,16 +48,34 @@
 </template>
     
 <script>
-
+import axios from 'axios'
 export default {
     name: 'user',//add store and dynamically update 
     computed: {
         getData(){
             return this.$store.state.userDetails;
         },
-    }
+    method: {
+        OrderHistory(){
+         
+            let urlOrder='http://localhost:8088/order/timeStamps/'+this.$store.state.Id;
+            axios.get(urlOrder)
+                .then((response)=>{
+                        console.log(response);
+                        this.saveInOrderHistory(response);
+                 });
+            this.$router.push({name:'orderhistory'}); 
+    },
+        saveInOrderHistory(response){
+        this.$store.state.orderHistory = response.data;
+        // return response.data;
+        console.log(this.$store.state.orderHistory);
+        },
 
-}
+        }
+
+        }
+    }
 </script>
 
 <style scoped>

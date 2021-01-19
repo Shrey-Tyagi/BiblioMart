@@ -44,15 +44,17 @@ export default {
     },
   deleteItemFromCart(productId,merchantId){
     console.log(productId,merchantId);
-    let delUrl="http://localhost:8087/cart/delproduct/"+this.$store.state.Id+'/'+productId+'/'+merchantId
+    let delUrl="http://localhost:8087/cart/delproduct/"+this.$store.state.Id+'/'+productId+'/'+merchantId;
       axios.delete(delUrl)
                 .then( (response) => {
                     console.log(response);
+                    this.getCartUpdate();
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-                this.getCartUpdate();
+                
+                
     // TODO SEND userid,productId,merchantId
     // TODO update the store of cart
   },
@@ -78,15 +80,17 @@ export default {
     },
   checkout(){
     console.log("checkout");
-    this.$store.state.id;
-    axios.delete("http://localhost:8087/cart/cartdel/",this.$store.state.id)
+    let urlDel="http://localhost:8087/cart/cartdel/"+this.$store.state.Id;
+    axios.delete(urlDel)
                 .then( (response) => {
                     console.log(response);
-                })
+                    this.getCartUpdate();
+                })    
                 .catch(function (error) {
                     console.log(error);
                 });
-                this.getCartUpdate();
+                
+                
     // TODO SEND productId
     // TODO empty the store of cart
   }

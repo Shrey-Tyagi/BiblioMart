@@ -17,6 +17,15 @@ const routes = [
     component: () => import('../views/home/Cart.vue')
   },
   {
+    path: '/orderhistory',
+    name:'orderhistory',
+    component: () => import('../views/account/OrderHistory.vue')
+  },
+  {
+    path: '/orderproduct',
+    component: () => import('../views/account/OrderProduct.vue')
+  },
+  {
     path: '/login',
     component: () => import('../views/account/Login.vue')
   },

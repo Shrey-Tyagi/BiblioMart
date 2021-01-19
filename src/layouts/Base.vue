@@ -2,49 +2,27 @@
 <template>
   <div>
     <div>
-      <form @submit.prevent="getUser">
-       <button> {{ this.$store.state.userName }} </button>
-       </form>
-      <!--<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <router-link class="navbar-brand" to="/">BiblioMart</router-link>
-        <div class="ml-auto">
-          <div v-if="user.photoURL">
-            <router-link to="/user">
-            <img
-               
-              :src="user.photoURL"
-              class="img-thumbnail profile-image"
-              alt = "User Img"
-            />
-            <button @click="getUser"> {{ this.$store.state.userName }} </button>
-            </router-link>
-            <router-link class="btn btn-primary my-2 my-sm-0" to="/cart">
-              <img
-                src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
-                width="50"
-                alt
-              />
-              <span class="badge badge-danger badge-pill">{{ cart.length }}</span>
-            </router-link>
-          </div>
-          <router-link class="btn btn-primary my-2 my-sm-0" to="/register">Register</router-link>
-          <router-link class="btn btn-primary my-2 my-sm-0" to="/login">Login</router-link>
+      <nav class="main-flex">
+        <div class="tag-flex"> <h2> BiblioMart </h2> </div>
+      <div class="flex-class-nav">
+        <div class="child-flex-class-nav">
+          <form @submit.prevent="getUser">
+          <button> {{ this.$store.state.userName }} </button>
+          </form>
         </div>
-      </nav>-->
-    <!-- <div >
-    <ProductCartCollection></ProductCartCollection>
-    <div> -->
-      <form @submit.prevent="getCart">
-        <button type="submit" class="btn btn-primary my-2 my-sm-0">
-              <img
-                src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
-                width="50"
-                alt
-              />
-        </button>
-              <!-- <span class="badge badge-danger badge-pill">0</span>  -->
-              <!-- //To do  -->
-      </form>
+        <div class="child-flex-class-nav">
+          <form @submit.prevent="getCart">
+              <button type="submit" class="btn btn-primary my-2 my-sm-0">
+                  <img
+                    src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
+                    width="50"
+                    alt
+                  />
+            </button>
+          </form>
+        </div>
+      </div>
+      </nav>
     </div>
     <div class="page-container">
       <router-view />
@@ -211,4 +189,29 @@ input {
 .btn:focus {
   background: teal;
 }
+
+.flex-class-nav{
+  align-content: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.child-flex-class-nav{
+  margin-right: 60px ;
+  align-self: center;
+}
+
+.main-flex{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.tag-flex{
+  align-self: center;
+  margin-left: 50px;
+  color: palevioletred;
+  align-self: center;
+}
+
 </style>

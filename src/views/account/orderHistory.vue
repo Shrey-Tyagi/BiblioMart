@@ -18,8 +18,9 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: 'HelloWorld',
+  name: 'OrderHistory',
   computed:{
     getOrderList(){
       let orderList = [];
@@ -39,11 +40,22 @@ export default {
   },
   methods:{
     ordersOfProduct(orderId){
-      console.log(orderId);
+    console.log(orderId);
+    let urlPro = "http://localhost:8088/order/getorder/" +orderId;
+    axios.get(urlPro)
+            .then((response)=>{
+                console.log(response);
+                this.saveInOrder(response);
+                console(this.$store.state.orderProduct)
+            });  
       // TODO call this url -> order/getorder/{orderId}
       // TODO recieve products List
-    }
+    },
+    saveInOrder(response){
+      this.$store.state.orderProduct = response.data;
+      return response.data;
   }
+}
 }
 </script>
 

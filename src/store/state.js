@@ -13,6 +13,9 @@ export const store =  new Vuex.Store({
       mainProducts:[],
       singleProduct: {},
       productId: 1,
-      userCart: []
+      userCart: [],
+      orderHistory: [],
+      orderProduct:{},
+      searchedProducts:[]
     }
   })
