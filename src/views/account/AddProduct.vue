@@ -1,4 +1,5 @@
 <template>
+  <div class="addproduct-font">
     <form @submit.prevent="onSubmit">
     <div class="form-group box-shadow">
         <fieldset id="categoryName">
@@ -53,7 +54,11 @@
       <input type="text" class="form-control" id="edition" maxlength="32" placeholder="Edition of the book" v-model = "edition" required>
     </div>
     <button class="btn btn-primary">Save product</button>
+    <router-link name ='home'>
+    <button class="form-submit-user"> Home </button>
+    </router-link>
   </form>
+  </div>
 </template>
 
 
@@ -161,4 +166,12 @@ export default {
 div {
   box-shadow: 10px 10px 5px grey;
 }
+
+.addproduct-font{
+  width:60%;
+  margin: auto;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
 </style>

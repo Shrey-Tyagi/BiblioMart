@@ -21,7 +21,12 @@
       </div>
     </div>
     <h3> Total Cost : {{ totalCost() }} </h3>
+    <router-link to='/'>
+      <button class="view-item"> Home </button>
+    </router-link>
     <button @click="checkout()" class="view-item"> CHECK OUT </button>
+    
+
   </div>
 </template>
 
@@ -86,6 +91,9 @@ export default {
     
       console.log("checkout*******************************");
       let urlorder=this.$store.state.order+"/order/orderadd/"+this.$store.state.Id+"/"+this.$store.state.userDetails.email;
+
+      console.log("****************Email")
+      console.log(this.$store.state.userDetails.email)
       let urlDel=this.$store.state.cart+"/cart/cartdel/"+this.$store.state.Id;
       console.log(urlorder);
       console.log(this.$store.state.userCart)
@@ -98,7 +106,7 @@ export default {
                   .catch(function (error) {
                       console.log(error);
                   });
-                  
+      alert("Your order is placed! Be on the lookout for our executive ;)");
                   
       // TODO SEND productId
       // TODO empty the store of cart

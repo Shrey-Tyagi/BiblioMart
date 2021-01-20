@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export const store =  new Vuex.Store({
     state : {
       Id: -1,
+      email:"",
       // merDetails:[],
       mainProductList:[],
       productList:[],
@@ -19,11 +20,11 @@ export const store =  new Vuex.Store({
       orderProduct:{},
       searchedProducts:[],
       guestUserId : -1,
-      registration : "http://10.177.1.69:8089",
-      merchant : "http://10.177.1.69:8089",
-      product : "http://10.177.1.69:8089",
-      order : "http://10.177.1.69:8089",
-      search : "http://10.177.1.69:8089",
-      cart : "http://10.177.1.69:8089"
+      registration : "http://10.177.1.69:8082",
+      merchant : "http://10.177.1.69:8081",
+      product : "http://10.177.1.69:8085",
+      order : "http://10.177.1.137:8082",
+      search : "http://10.177.1.69:8086",
+      cart : "http://10.177.1.137:8081"
     }
   })

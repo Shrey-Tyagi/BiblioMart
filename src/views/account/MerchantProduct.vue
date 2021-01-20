@@ -21,7 +21,10 @@
     <button class="form-submit-user update"> Update Product </button>
     </router-link>
     <router-link to='/AddProduct'>
-    <button class="form-submit-user"> Add Product</button>
+    <button class="form-submit-user update"> Add Product</button>
+    </router-link>
+    <router-link to='/'>
+    <button class="form-submit-user update"> Home </button>
     </router-link>
 </div>
 </template>

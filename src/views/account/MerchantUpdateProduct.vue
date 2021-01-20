@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="updateproduct-font">
       <h2>Update Product</h2>
       <section>
               <form @submit.prevent="onSubmit">
@@ -69,6 +69,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.updateproduct-font{
+  width:60%;
+  margin: auto;
+  margin-top:50px ;
+  border-radius:20px ;
+}
 
 </style>

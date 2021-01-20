@@ -80,12 +80,12 @@
           <div class="col-xs-6 col-md-3">
             <h6>Makers</h6>
             <ul class="footer-links">
-              <li><a href="http://scanfcode.com/category/c-language/">Shikhar</a></li>
-              <li><a href="http://scanfcode.com/category/front-end-development/">Dinesh</a></li>
-              <li><a href="http://scanfcode.com/category/back-end-development/">Shrey</a></li>
-              <li><a href="http://scanfcode.com/category/java-programming-language/">Vasavi</a></li>
-              <li><a href="http://scanfcode.com/category/android/">Vraj</a></li>
-              <li><a href="http://scanfcode.com/category/templates/">Amit</a></li>
+              <li><a href="#">Shikhar</a></li>
+              <li><a href="#">Dinesh</a></li>
+              <li><a href="#">Shrey</a></li>
+              <li><a href="#">Vasavi</a></li>
+              <li><a href="#">Vraj</a></li>
+              <li><a href="#">Amit</a></li>
             </ul>
           </div>
 
@@ -206,7 +206,10 @@ export default {
 //cs-ecommerce/src/layout/Base.vue
 <style>
 
-
+.btn{
+  width: 250px;
+  padding: 15px 32px;
+}
 .cart{
 background-color:#4C1D95
 }

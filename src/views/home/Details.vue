@@ -3,7 +3,7 @@
       <div class ="main-container-flex">
         <div class ="child-container-flex">
           <h2>{{product.productName}}</h2>
-          <img alt="Vue logo" src="https://www.w3schools.com/css/pineapple.jpg" width = "60%">
+          <img alt="Vue logo" :src="product.imageUrl" width = "60%">
           <p class = "hello-none"> {{getData()}} </p>
         </div>
         <div class ="child-container-flex child-description">
@@ -15,9 +15,9 @@
           <p> Product : {{product.productName}} </p>
           <p> Category : {{ product.catName }} </p>
           <p> Language : {{ product.productDetails.language }} </p>
-          <p> Language : {{ product.productDetails.author }} </p>
-          <p> Language : {{ product.productDetails.publisher }} </p>
-          <p> Language : {{ product.productDetails.edition }} </p>
+          <p> Author : {{ product.productDetails.author }} </p>
+          <p> Publisher : {{ product.productDetails.publisher }} </p>
+          <p> Edition : {{ product.productDetails.edition }} </p>
         </div>
         <div class ="child-container-flex merchant-flex">
             Quantity : <input type="number" minval=1 v-model="quantity"><br><br>
@@ -92,6 +92,8 @@ export default {
         if(this.$store.state.Id == -1){
           addToCartdata.userId=this.$store.state.guestUserId
           }
+        console.log("******************** guestuserID")
+        console.log(addToCartdata)
 
 
         /////

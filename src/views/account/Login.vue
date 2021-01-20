@@ -34,6 +34,9 @@
             <button class="btn btn-primary btn-block">Merchant product list!</button> 
             shift to a different merchant page
             </router-link>-->
+            <router-link to='/'>
+              <button class="btn btn-primary btn-block"> Home </button>
+            </router-link>
             </form>
           </div>
         </div>
@@ -70,13 +73,16 @@ export default {
   return response.data;
   },//to getUSer is for user and get data for merchant 
   saveInUser(response){
-  this.$store.state.Id= response.data.userId;
+  this.$store.state.Id = response.data.userId;
   this.$store.state.userName= response.data.name;
+  this.$store.state.userDetails.email = response.data.email;
+  console.log(response);
   },
   getCartUpdate(){
       let urlcart = this.$store.state.cart+'/cart/getcart/'+this.$store.state.guestUserId
       axios.get(urlcart)
             .then((response)=>{
+              console.log("****************DB return of guestcart")
                 console.log(response);
                 this.saveInCart(response);
             });
@@ -94,9 +100,8 @@ export default {
   console.log(get);
   axios.post(this.$store.state.registration+'/registration/login/',get)
             .then((response)=>{
-                console.log(response);
+                console.log("***************response of login request");
                 this.saveInUser(response);
-                console.log(this.$store.state.Id);
 /////
   let cartDetails = this.$store.state.userCart
   for(let i=0;i<cartDetails.length;i++){
@@ -105,7 +110,7 @@ export default {
     let productName= cartDetails[i].productName;
     let quantity = cartDetails[i].quantity;
     let merchantId = cartDetails[i].merchantId;
-    let cost = cartDetails[i].price;
+    let cost = cartDetails[i].cost;
       let addToCartdata = {
           "userId": userId,
           "productId" :productId,

@@ -2,7 +2,12 @@
   <div class="hello">
     <div class="product-list-flex">
       <div class="each-product-flex" v-for="mainProductList in mainProductList" :key="mainProductList.productId">
-          <img alt="Vue logo" src="https://www.w3schools.com/css/pineapple.jpg" width = "60%">
+          <div v-if="mainProductList.imageUrl != ''">
+            <img alt="Vue logo" :src="mainProductList.imageUrl" height="250px" width = "60%">
+          </div>
+          <div v-else>
+            <img alt="Vue logo" src="https://www.w3schools.com/css/paris.jpg" height="250px" width = "60%">
+          </div>
         <h3>{{ mainProductList.catName }}</h3>
         <button class="product-button" @click="getSingleProduct(mainProductList.productId)" >{{ mainProductList.productName }}</button>
         </div>

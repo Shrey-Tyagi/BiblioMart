@@ -12,6 +12,11 @@
         <div>
           <button @click="ordersOfProduct(order.orderId)" class="view-item"> VIEW ORDERS </button>
         </div>
+        <div>
+          <router-link name ='home'>
+           <button class="form-submit-user"> Home </button>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -41,13 +46,14 @@ export default {
   methods:{
     ordersOfProduct(orderId){
     console.log(orderId);
-    let urlPro = this.$store.state.order+"/order/getorder/" +orderId;
+    let urlPro = this.$store.state.order+"/order/getorder/"+orderId;
     axios.get(urlPro)
             .then((response)=>{
                 console.log(response);
                 this.saveInOrder(response);
                 console(this.$store.state.orderProduct)
             });  
+            this.$router.push({path:"/orderproduct"});/////////
       // TODO call this url -> order/getorder/{orderId}
       // TODO recieve products List
     },

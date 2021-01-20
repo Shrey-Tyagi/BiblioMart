@@ -14,6 +14,11 @@
         </div>
       </div>
       <h3> Total Price : {{ getPrice() }} </h3>
+    <div>
+      <router-link to="/">
+        <button class="button form-submit-user"> Home </button>
+      </router-link>
+    </div>
     </div>
   </div>
 </template>
@@ -30,7 +35,7 @@ export default {
       getPrice(){
           let price = 0;
           for(let i=0;i<this.getOrderProduct.length;i++){
-              price += this.getOrderProduct[i].cost;
+              price += (this.getOrderProduct[i].cost)*(this.getOrderProduct[i].quantity);
           }
           return price;
       }
@@ -51,6 +56,23 @@ export default {
   background-color:#F5F5F5;
   margin: 10px 0;
   padding: 20px;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color:white; /* Green */
+  border: 1px solid  #4CAF50;
+  color:  #4CAF50;
 }
 
 </style>

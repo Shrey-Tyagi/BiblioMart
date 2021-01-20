@@ -42,10 +42,12 @@
                 <input type="password" placeholder="Confirm Password" v-model="rePassword" class="form-control" required>
                 <i class="zmdi zmdi-lock"></i>
             </div>
-            
             <button>Register
                 <i class="zmdi zmdi-arrow-right"></i>
             </button>
+            <router-link to='/'>
+              <button class="zmdi zmdi-arrow-right"> Home </button>
+            </router-link>
            
         </form>
     </div>

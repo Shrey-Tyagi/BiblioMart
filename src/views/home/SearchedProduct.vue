@@ -4,7 +4,8 @@
       <br>
       <h2> Search Results : </h2>
         <div class="flex-container-search" v-for="productList in searchedProductsList" :key="productList.productId" @click="product(productList.productId)">
-            <div class="flex-child-container-search search-image"> <img src="https://www.w3schools.com/css/paris.jpg" alt="Img" width="40%"> </div>
+            <div v-if="productList.imageUrl == ''" class="flex-child-container-search search-image"> <img src="https://www.w3schools.com/css/paris.jpg" alt="Img" width="40%"> </div>
+            <div v-else class="flex-child-container-search search-image"> <img :src="productList.imageUrl" alt="Img" width="40%"> </div>
             <div class="flex-child-container-search"> Product : {{ productList.productName }} </div>
             <div class="flex-child-container-search"> Category : {{ productList.catName }} </div>
             <div class="flex-child-container-search"> Price : Rs. {{ productList.merchantDetailsList[0].cost }} </div>
