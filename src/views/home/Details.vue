@@ -32,10 +32,10 @@
             <span v-if="quantity > 0">{{price*quantity }}</span>
             <span v-else>0</span>
           <form @submit.prevent="addToCart">
-            <br><button class="product-button"> Add to Cart </button>
+            <br><button class="product-button button-border-radius"> Add to Cart </button>
           </form>
           <form @submit.prevent="getCartUpdate">
-            <br><button class="product-button"> Go to Cart </button>
+            <br><button class="product-button button-border-radius"> Go to Cart </button>
           </form>
         </div>
     </div>
@@ -183,6 +183,10 @@ export default {
   background-color: white;
     border: 1px solid #4CAF50;
   color: #4CAF50;
+}
+.button-border-radius{
+  border-radius:8px;
+  margin-bottom: 10px;
 }
 
 </style>

@@ -1,18 +1,18 @@
 <template>
   <div class="hello">
     <div class="product-list-flex">
-      <div class="each-product-flex" v-for="mainProductList in mainProductList" :key="mainProductList.productId">
+      <div class="each-product-flex border-product" v-for="mainProductList in mainProductList" :key="mainProductList.productId">
           <div v-if="mainProductList.imageUrl != ''">
             <img alt="Vue logo" :src="mainProductList.imageUrl" height="250px" width = "60%">
           </div>
           <div v-else>
             <img alt="Vue logo" src="https://www.w3schools.com/css/paris.jpg" height="250px" width = "60%">
           </div>
-        <h3>{{ mainProductList.catName }}</h3>
-        <button class="product-button" @click="getSingleProduct(mainProductList.productId)" >{{ mainProductList.productName }}</button>
+        <button class="button-border-radius product-button" @click="getSingleProduct(mainProductList.productId)" >{{ mainProductList.productName }}</button>
+        <h4>{{ mainProductList.catName }}</h4>
         </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -88,6 +88,16 @@ a {
   background-color: white;
     border: 1px solid #4CAF50;
   color: #4CAF50;
+}
+
+.border-product{
+  border: 1px solid black;
+  border-radius: 15px;
+  padding-top: 20px ;
+}
+
+.button-border-radius{
+  border-radius:8px;
 }
 
 </style>

@@ -39,7 +39,8 @@
                                 </label>
                                 <input type="password" name="rePassword" id="rePassword" placeholder="Repeat your password" v-model="rePassword" required>
                             </div>
-                            <button class="btn btn-primary">Register</button> 
+                            <button class="btn btn-primary button-border-radius">Register</button> 
+                            
                         </form>
                     </div>
                     <div class="flex-container imgcontainer">
@@ -141,6 +142,11 @@ section{
 .flex-container{
     width: 40%;
     margin: auto;
+}
+.button-border-radius{
+  margin-top: 10px;
+  border-radius:8px;
+  margin-bottom: 10px;
 }
 
 h2{

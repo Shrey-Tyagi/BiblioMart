@@ -8,12 +8,12 @@
         </div>
         <div class="child-flex-class-nav">
           <form @submit.prevent="getUser">
-          <button> {{ this.$store.state.userName }} </button>
+          <button class="button-border-radius btn-nav"> {{ this.$store.state.userName }} </button>
           </form>
         </div>
         <div class="child-flex-class-nav">
           <form @submit.prevent="getCart">
-              <button type="submit" class="btn btn-primary my-2 my-sm-0">
+              <button type="submit" class="button-border-radius btn btn-primary my-2 my-sm-0">
                   <img
                     src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
                     width="50"
@@ -24,7 +24,7 @@
         </div>
         <div class="child-flex-class-nav">
           <form @submit.prevent="logout()">
-            <button class= "btn-nav">  LogOut </button>
+            <button class= "button-border-radius  btn-nav">  LogOut </button>
           </form>
         </div>
       </div>
@@ -37,17 +37,17 @@
         </div>
         <div class="child-flex-class-nav">
           <router-link to="/register">
-            <button class= "btn-nav"> Register </button>
+            <button class= "button-border-radius btn-nav"> Register </button>
           </router-link>
         </div>
         <div class="child-flex-class-nav">
          <router-link to="/login">
-            <button class= "btn-nav"> Login </button>
+            <button class= "button-border-radius btn-nav"> Login </button>
          </router-link>
          </div>
         <div class="child-flex-class-nav">
           <form @submit.prevent="getCart()">
-              <button type="submit" class="btn btn-primary my-2 my-sm-0 cart" >
+              <button type="submit" class="button-border-radius btn btn-primary my-2 my-sm-0 cart" >
                   <img
                     src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG38.png"
                     width="50"
@@ -92,12 +92,14 @@
           <div class="col-xs-6 col-md-3">
             <h6>Quick Links</h6>
            <router-link to="/merchantRegister">
-              <button type="submit" class="btn my-2 my-sm-0">
+              <button type="submit" class="btn my-2 my-sm-0 button-border-radius ">
                   Merchant Registration
               </button>
           </router-link>
+          <br>
+
           <router-link to="/MerchantProduct">
-              <button type="submit" class="btn my-2 my-sm-0">
+              <button type="submit" class="btn my-2 my-sm-0 button-border-radius">
                   Merchant Products
               </button>
           </router-link>
@@ -437,8 +439,9 @@ input {
   }
 }
 
-/* div {
-  box-shadow: 10px 10px 5px #5F9EA0;
-} */
+.button-border-radius{
+  border-radius:8px;
+  margin-bottom: 10px;
+}
 
 </style>

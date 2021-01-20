@@ -13,18 +13,18 @@
           <h3>Cost : {{ cart.cost }}</h3>
         </div>
         <div>
-          <button @click="viewItemInCart(cart.productId)" class="view-item"> VIEW ITEM </button>
+          <button @click="viewItemInCart(cart.productId)" class="view-item button-border-radius"> VIEW ITEM </button>
         </div>
         <div>
-          <button @click="deleteItemFromCart(cart.productId,cart.merchantId)" class="delete-item"> DELETE ITEM </button>
+          <button @click="deleteItemFromCart(cart.productId,cart.merchantId)" class="delete-item button-border-radius"> DELETE ITEM </button>
         </div>
       </div>
     </div>
     <h3> Total Cost : {{ totalCost() }} </h3>
     <router-link to='/'>
-      <button class="view-item"> Home </button>
+      <button class="view-item button-border-radius"> Home </button>
     </router-link>
-    <button @click="checkout()" class="view-item"> CHECK OUT </button>
+    <button @click="checkout()" class="view-item button-border-radius"> CHECK OUT </button>
     
 
   </div>
@@ -164,7 +164,10 @@ export default {
   margin: 4px 2px;
   cursor: pointer;
 }
-
+.button-border-radius{
+  border-radius:8px;
+  margin-bottom: 10px;
+}
 .delete-item:hover{
   color: #008CBA;
   border: 1px solid #008CBA;

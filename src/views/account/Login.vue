@@ -26,16 +26,18 @@
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             <form @submit.prevent="getData">
-            <button type="submit" class="btn btn-primary btn-block">Login Merchant</button>
+            <button type="submit" class="btn btn-primary button-border-radius btn-block">Login Merchant</button>
             </form>
+            <br>
             <form @submit.prevent="getUser">
-            <button type="submituser" class="btn btn-primary btn-block">Login user</button>
+            <button type="submituser" class="btn btn-primary button-border-radius btn-block">Login user</button>
             <!--<router-link to="/MerchantProduct">
             <button class="btn btn-primary btn-block">Merchant product list!</button> 
             shift to a different merchant page
             </router-link>-->
+            <br>
             <router-link to='/'>
-              <button class="btn btn-primary btn-block"> Home </button>
+              <button class="btn btn-primary button-border-radius btn-block"> Home </button>
             </router-link>
             </form>
           </div>
@@ -65,7 +67,14 @@ export default {
                 console.log(response);
                 this.saveInMer(response);
             });
-            this.$router.push({name:'MerchantProduct'}); 
+ 
+            if(this.$store.state.Id != -1){
+              console.log(this.$store.state.Id);
+              this.$router.push({name:'MerchantProduct'});
+            }else{
+              alert("Please enter correct details");
+            }
+            
         },
   saveInMer(response){
   this.$store.state.productList= response.data.productDetails;
@@ -148,7 +157,11 @@ this.$store.state.guestUserId=-1;
 
 ////
             });
-            this.$router.push({name:'home'});
+            if(this.$store.state.Id != -1){
+              this.$router.push({name:'home'});
+            }else{
+              alert("Please enter correct details");
+            }
       },
   },
       
@@ -176,4 +189,10 @@ this.$store.state.guestUserId=-1;
 .btn:focus {
   background: rgb(122, 23, 250);
 }
+
+.button-border-radius{
+  border-radius:8px;
+  margin-bottom: 10px;
+}
+
 </style>
